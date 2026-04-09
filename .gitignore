@@ -1,0 +1,35 @@
+# Python virtual environments
+.venv/
+.venv-old/
+.venv311/
+
+# Python cache and build artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+
+# Generated runtime outputs
+flagged/
+models/
+*.pkl
+
+# Local editor and OS files
+.DS_Store
+Thumbs.db
+
+# Local environment files
+.env
+.env.*
+
+# Non-source assets excluded from the published repo
+*.zip
+*.pptx
+*.docx
