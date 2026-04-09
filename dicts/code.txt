@@ -1,0 +1,432 @@
+import re
+import os
+from collections import defaultdict
+
+# (AFFIXES dictionary from your previous input can be used as a starting point for suffix_categories)
+# For brevity, I'll define a simplified structure here. A more complete one would be better.
+
+def load_dictionary_from_file(filepath):
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            words = {line.strip().lower() for line in f if line.strip()}
+        print(f"Successfully loaded {len(words)} unique words from '{filepath}'.")
+        return words
+    except FileNotFoundError:
+        print(f"Error: Dictionary file '{filepath}' not found.")
+        return set()
+    except Exception as e:
+        print(f"An error occurred while reading '{filepath}': {e}")
+        return set()
+
+def get_azerbaijani_suffixes_categorized():
+    """
+    Returns a dictionary of categorized Azerbaijani suffixes, sorted by length (longest first).
+    This is a simplified example; a production system would need a much more extensive list.
+    """
+    suffixes = {
+        "verb_infinitive": sorted(["maq", "mək"], key=len, reverse=True),
+        "verb_tense_mood_aspect_person": sorted(list(set([
+            "ır", "ir", "ur", "ür", "acaq", "əcək", "dı", "di", "du", "dü", "tı", "ti", "tu", "tü",
+            "mış", "miş", "muş", "müş", "sa", "sə", "ar", "ər", "malı", "məli",
+            "am", "əm", "san", "sən", "ıq", "ik", "uq", "ük", "sınız", "siniz", "sunuz", "sünüz",
+            "dım", "dim", "dum", "düm", "dın", "din", "dun", "dün", "dıq", "dik", "duq", "dük",
+            "dınız", "diniz", "dunuz", "dünüz",
+            "acaqsan", "əcəksən", "acaqsınız", "əcəksiniz", "acağıq", "əcəyik", "acağam", "əcəyəm",
+            "dılar", "dilər", "dular", "dülər", "tılar", "tilər", "tular", "tülər",
+            "mışlar", "mişlər", "muşlar", "müşlər", "salar", "sələr"
+        ])), key=len, reverse=True),
+        "verb_voice_negation": sorted(list(set([
+            "ma", "mə", "dır", "dir", "dur", "dür", "t", "ıl", "il", "ul", "ül", "n", "ın", "in", "un", "ün", # 'ın' etc. can be voice
+            "ış", "iş", "uş", "üş" # Reciprocal voice
+        ])), key=len, reverse=True),
+        
+        "noun_plural": sorted(["lar", "lər"], key=len, reverse=True),
+        "noun_possessive": sorted(list(set([
+            "ım", "im", "um", "üm", "ın", "in", "un", "ün", "ı", "i", "u", "ü",
+            "ımız", "imiz", "umuz", "ümüz", "ınız", "iniz", "unuz", "ünüz", "ları", "ləri",
+            "sı", "si", "su", "sü" # Buffer + 3rd person possessive
+        ])), key=len, reverse=True),
+        "noun_case": sorted(list(set([
+            "a", "ə", "da", "də", "ta", "tə", "dan", "dən", "tan", "tən",
+            "ın", "in", "un", "ün", "la", "lə", "ca", "cə", # Instrumental/Comitative/Adverbial
+            # Buffer + case
+            "ya", "yə", "na", "nə", "yı", "yi", "yu", "yü", "nı", "ni", "nu", "nü",
+            "nda", "ndə", "ndan", "ndən"
+        ])), key=len, reverse=True),
+        
+        "noun_derivational": sorted(list(set([
+            "lıq", "lik", "luq", "lük", "çı", "çi", "çu", "çü", "cı", "ci", "cu", "cü",
+            "stan", "istan", "ıstan", "üstan", "xana", "daş", "caq", "cək", # oyuncaq
+            "ıq", "ik", "uq", "ük", # bilik (knowledge) - careful, overlaps with verb endings
+            "ıntı", "inti", "untu", "üntü", # qazıntı
+            "baz", "dar", "gah", "şünas" # some common loan derivational suffixes
+        ])), key=len, reverse=True),
+        
+        "adj_derivational": sorted(list(set([
+            "lı", "li", "lu", "lü", "sız", "siz", "suz", "süz", "dakı", "dəki", "kı", "ki",
+            "i", "vi", "ik", # tarixi, kimyəvi, fiziki - careful with 'i' and 'ik'
+            "cıl", "cil", "cul", "cül", "can", "cən", # ölümcül, istiqanlıcan
+            "ağan", "əyən" # qaçağan, güləyən (participle-adjectives)
+        ])), key=len, reverse=True),
+        
+        "adv_derivational": sorted(list(set([
+            "ca", "cə", "casına", "cəsinə", "dan", "dən", # birdən, çoxdan (temporal/manner)
+            "yana", "yanə" # dostyana
+        ])), key=len, reverse=True),
+
+        # For general stem stripping, combine many suffixes
+        "all_inflectional": [], # Will be populated
+        "all_derivational": []  # Will be populated
+    }
+    suffixes["all_inflectional"] = sorted(list(set(
+        suffixes["verb_tense_mood_aspect_person"] + suffixes["verb_voice_negation"] +
+        suffixes["noun_plural"] + suffixes["noun_possessive"] + suffixes["noun_case"]
+    )), key=len, reverse=True)
+    
+    suffixes["all_derivational"] = sorted(list(set(
+        suffixes["noun_derivational"] + suffixes["adj_derivational"] + suffixes["adv_derivational"] +
+        ["laş", "ləş"] # Verb forming
+    )), key=len, reverse=True)
+    
+    return suffixes
+
+def strip_suffix_if_found(word, suffix_list, dictionary, min_len):
+    """Helper to strip the first matching suffix that results in a dictionary word."""
+    for s in suffix_list:
+        if word.endswith(s):
+            stem = word[:-len(s)]
+            if len(stem) >= min_len and stem in dictionary:
+                return stem, s # Return stem and the suffix stripped
+    return None, None
+
+def get_potential_stem(word, all_suffixes_sorted, dictionary, min_len):
+    """Aggressively strips suffixes to find a potential stem."""
+    current_word = word
+    # Iteratively strip, preferring longer suffixes first
+    for _ in range(4): # Max 4 stripping passes
+        original_word_before_pass = current_word
+        for s_list_name in ["all_inflectional", "all_derivational", "verb_infinitive"]: # Order of stripping preference
+            for suffix in all_suffixes_sorted.get(s_list_name, []):
+                if current_word.endswith(suffix):
+                    stem = current_word[:-len(suffix)]
+                    if len(stem) >= min_len: # For stems, we might be more lenient if it's not in dict
+                        if stem in dictionary or len(stem) <=3 : # Prioritize dict stems, but allow short non-dict stems
+                            current_word = stem
+                            # No break here, try to strip more if possible in this pass
+        if current_word == original_word_before_pass: # No change in this pass
+            break
+    return current_word
+
+
+def process_word(word, dictionary, suffixes, min_stem_len):
+    """
+    Processes a single word to heuristically find its base forms.
+    Returns a dictionary of identified forms.
+    """
+    forms = {
+        "original": word,
+        "verb_base": None,        # e.g., "yaz" from "yazmaq"
+        "verb_lemma": None,       # e.g., "yazmaq"
+        "noun_singular": None,    # e.g., "kitab" from "kitablar"
+        "noun_lemma": None,       # same as noun_singular for this heuristic
+        "adj_basic": None,        # e.g., "gözəl"
+        "adj_lemma": None,        # same as adj_basic
+        "adv_root": None,         # e.g., "tez" or "yavaş" from "yavaşca"
+        "adv_lemma": None,        # same as adv_root
+        "general_lemma": set(),   # Can hold multiple if ambiguous
+        "potential_stem": None
+    }
+
+    # --- Verb Processing ---
+    temp_verb_stem = word
+    stripped_verb_inflections = False
+    # Try stripping tense/mood/aspect/person first, then voice/negation
+    for s_list in [suffixes["verb_tense_mood_aspect_person"], suffixes["verb_voice_negation"]]:
+        for s in s_list:
+            if temp_verb_stem.endswith(s):
+                stem_candidate = temp_verb_stem[:-len(s)]
+                if len(stem_candidate) >= min_stem_len:
+                    temp_verb_stem = stem_candidate
+                    stripped_verb_inflections = True
+                    # break # Found one suffix, re-evaluate stem (or continue stripping in this category)
+    
+    if stripped_verb_inflections or word.endswith(tuple(suffixes["verb_infinitive"])):
+        verb_root_candidate = temp_verb_stem
+        if word.endswith(tuple(suffixes["verb_infinitive"])): # Already an infinitive
+            verb_root_candidate = word[:-len(suffixes["verb_infinitive"][0])] # Approx.
+            if len(word[:-3]) >= min_stem_len : verb_root_candidate = word[:-3] # for maq/mək
+            
+            forms["verb_lemma"] = word
+            forms["general_lemma"].add(word)
+
+        # Check if this root_candidate + infinitive is in dictionary
+        for inf_s in suffixes["verb_infinitive"]:
+            potential_lemma = verb_root_candidate + inf_s
+            if potential_lemma in dictionary:
+                forms["verb_base"] = verb_root_candidate
+                forms["verb_lemma"] = potential_lemma
+                forms["general_lemma"].add(potential_lemma)
+                break
+        if not forms["verb_lemma"] and verb_root_candidate in dictionary and len(verb_root_candidate) >= min_stem_len:
+             # If no infinitive found, but the stripped stem is a word, consider it a base.
+             # This is less certain for lemma.
+             forms["verb_base"] = verb_root_candidate
+
+
+    # --- Noun Processing ---
+    temp_noun_form = word
+    # 1. Check for plural
+    is_plural = False
+    for pl_s in suffixes["noun_plural"]:
+        if temp_noun_form.endswith(pl_s):
+            stem_after_plural = temp_noun_form[:-len(pl_s)]
+            if len(stem_after_plural) >= min_stem_len and stem_after_plural in dictionary:
+                forms["noun_singular"] = stem_after_plural
+                forms["noun_lemma"] = stem_after_plural
+                forms["general_lemma"].add(stem_after_plural)
+                is_plural = True
+            break
+    
+    if not is_plural: # If not plural, or plural stripping didn't yield dict word
+        # 2. Try stripping possessive and case from non-plural or original word
+        current_noun_candidate = word
+        for _ in range(2): # Allow stripping possessive then case, or vice-versa
+            original_candidate = current_noun_candidate
+            for poss_s in suffixes["noun_possessive"]:
+                if current_noun_candidate.endswith(poss_s):
+                    stem = current_noun_candidate[:-len(poss_s)]
+                    if len(stem) >= min_stem_len and stem in dictionary:
+                        current_noun_candidate = stem
+                        break 
+            for case_s in suffixes["noun_case"]:
+                if current_noun_candidate.endswith(case_s):
+                    stem = current_noun_candidate[:-len(case_s)]
+                    if len(stem) >= min_stem_len and stem in dictionary:
+                        current_noun_candidate = stem
+                        break
+            if current_noun_candidate == original_candidate:
+                break # No change in this pass
+        
+        # If stripping led to a dictionary word, or the original word itself is a candidate
+        if current_noun_candidate in dictionary and len(current_noun_candidate) >= min_stem_len:
+            # Avoid assigning if it looks strongly like a verb infinitive
+            if not any(current_noun_candidate.endswith(inf) for inf in suffixes["verb_infinitive"]):
+                forms["noun_singular"] = current_noun_candidate
+                forms["noun_lemma"] = current_noun_candidate
+                forms["general_lemma"].add(current_noun_candidate)
+
+    # 3. Check for noun derivational suffixes (even if inflections were stripped)
+    # This can help confirm noun status or find a derived noun.
+    noun_to_check_derivation = forms["noun_singular"] if forms["noun_singular"] else word
+    for nd_s in suffixes["noun_derivational"]:
+        if noun_to_check_derivation.endswith(nd_s):
+            stem = noun_to_check_derivation[:-len(nd_s)]
+            if len(stem) >= min_stem_len and stem in dictionary: # Base of derivation is a word
+                if not forms["noun_singular"]: # If not already identified as singular
+                    forms["noun_singular"] = noun_to_check_derivation
+                    forms["noun_lemma"] = noun_to_check_derivation
+                    forms["general_lemma"].add(noun_to_check_derivation)
+                break 
+            elif not stem and len(noun_to_check_derivation) > len(nd_s) : # e.g. "gözəllik" from "gözəl" (stem "gözəl" not "gözəl"+lik)
+                 if not forms["noun_singular"]:
+                    forms["noun_singular"] = noun_to_check_derivation
+                    forms["noun_lemma"] = noun_to_check_derivation
+                    forms["general_lemma"].add(noun_to_check_derivation)
+
+
+    # --- Adjective Processing ---
+    # Adjectives have fewer inflections. Mainly check derivational.
+    adj_candidate = word
+    stripped_adj_deriv = False
+    for ad_s in suffixes["adj_derivational"]:
+        if adj_candidate.endswith(ad_s):
+            stem = adj_candidate[:-len(ad_s)]
+            if len(stem) >= min_stem_len and stem in dictionary:
+                # word is likely a derived adjective. The stem is its base.
+                # The "basic form" of the adjective is 'word' itself.
+                forms["adj_basic"] = word
+                forms["adj_lemma"] = word
+                forms["general_lemma"].add(word)
+                stripped_adj_deriv = True
+                break
+    if not stripped_adj_deriv and adj_candidate in dictionary: # If not derived, and is a word
+        # Avoid assigning if it looks strongly like a verb infinitive or has strong noun inflections
+        is_verb_inf = any(adj_candidate.endswith(inf) for inf in suffixes["verb_infinitive"])
+        has_noun_plural = any(adj_candidate.endswith(pl) for pl in suffixes["noun_plural"])
+        if not is_verb_inf and not has_noun_plural: # Basic check
+            forms["adj_basic"] = adj_candidate
+            forms["adj_lemma"] = adj_candidate
+            forms["general_lemma"].add(adj_candidate)
+
+
+    # --- Adverb Processing ---
+    adv_candidate = word
+    stripped_adv_deriv = False
+    for adv_s in suffixes["adv_derivational"]:
+        if adv_candidate.endswith(adv_s):
+            stem = adv_candidate[:-len(adv_s)]
+            if len(stem) >= min_stem_len and stem in dictionary:
+                forms["adv_root"] = stem # The base from which adverb is formed
+                forms["adv_lemma"] = adv_candidate # The adverb itself is often the lemma
+                forms["general_lemma"].add(adv_candidate)
+                stripped_adv_deriv = True
+                break
+    if not stripped_adv_deriv and adv_candidate in dictionary: # If not derived, and is a word
+         # If it doesn't have strong verb/noun/adj endings, it might be a base adverb
+        is_verb_inf = any(adv_candidate.endswith(inf) for inf in suffixes["verb_infinitive"])
+        has_noun_plural = any(adv_candidate.endswith(pl) for pl in suffixes["noun_plural"])
+        # Add more checks if needed to avoid misclassifying other POS as adverbs
+        if not is_verb_inf and not has_noun_plural and len(adv_candidate) <= 5: # Heuristic for short base adverbs
+            forms["adv_root"] = adv_candidate
+            forms["adv_lemma"] = adv_candidate
+            forms["general_lemma"].add(adv_candidate)
+
+    # --- General Lemma (if not set by specific POS) ---
+    if not forms["general_lemma"] and word in dictionary:
+        # If no specific lemma found, and it's a dictionary word, it's its own lemma.
+        # This is a fallback.
+        if not any(word.endswith(inf) for inf in suffixes["verb_infinitive"]) and \
+           not any(word.endswith(pl) for pl in suffixes["noun_plural"]):
+            forms["general_lemma"].add(word)
+
+
+    # --- Potential Stem (Aggressive Stripping) ---
+    # Combine all suffixes for aggressive stripping
+    all_suffixes_combined = suffixes["all_inflectional"] + suffixes["all_derivational"] + suffixes["verb_infinitive"]
+    all_suffixes_combined = sorted(list(set(all_suffixes_combined)), key=len, reverse=True)
+    
+    current_stem_candidate = word
+    for _ in range(4): # Iterative stripping for stem
+        original_stem_candidate = current_stem_candidate
+        stripped_in_pass = False
+        for s in all_suffixes_combined:
+            if current_stem_candidate.endswith(s):
+                stem = current_stem_candidate[:-len(s)]
+                if len(stem) >= 1: # Stem can be very short
+                    current_stem_candidate = stem
+                    stripped_in_pass = True
+                    # Don't break, try to strip more from the new shorter stem
+        if not stripped_in_pass:
+            break
+    
+    # The stem should ideally be in the dictionary or a very short plausible morpheme
+    if len(current_stem_candidate) >= min_stem_len and current_stem_candidate in dictionary:
+        forms["potential_stem"] = current_stem_candidate
+    elif len(current_stem_candidate) >= 1 and len(current_stem_candidate) < min_stem_len : # Allow very short stems if not in dict
+        forms["potential_stem"] = current_stem_candidate
+    elif not forms["potential_stem"]: # Fallback if aggressive stripping yields nothing satisfactory
+        # Try to find the shortest form among already identified bases/lemmas
+        shortest_form = word
+        for key in ["verb_base", "noun_singular", "adj_basic", "adv_root"]:
+            if forms[key] and len(forms[key]) < len(shortest_form):
+                shortest_form = forms[key]
+        if len(shortest_form) >=1 : forms["potential_stem"] = shortest_form
+
+
+    # If no specific lemma was found, but a stem was, use the stem as a general lemma candidate
+    if not forms["general_lemma"] and forms["potential_stem"] and forms["potential_stem"] in dictionary:
+        forms["general_lemma"].add(forms["potential_stem"])
+    
+    # If still no general lemma, and the original word is in dict, use original.
+    if not forms["general_lemma"] and word in dictionary:
+         forms["general_lemma"].add(word)
+
+
+    return forms
+
+
+# --- Main Execution ---
+if __name__ == "__main__":
+    dictionary_filepath = "root_words.txt" # As per user's file
+    output_filepath_base = "azerbaijani_linguistic_forms"
+
+    MIN_STEM_LENGTH_PARAM = 1 # Minimum length for a stem to be considered plausible after stripping.
+                              # 1 is very aggressive, 2 is safer.
+
+    if not os.path.exists(dictionary_filepath):
+        print(f"FATAL ERROR: The dictionary file '{dictionary_filepath}' was not found.")
+        print("Please ensure the file exists in the correct location.")
+        exit()
+
+    all_dictionary_words = load_dictionary_from_file(dictionary_filepath)
+    categorized_suffixes = get_azerbaijani_suffixes_categorized()
+
+    results = {
+        "verb_bases": set(),
+        "verb_lemmas": set(),
+        "noun_singulars": set(),
+        "noun_lemmas": set(),
+        "adj_basics": set(),
+        "adj_lemmas": set(),
+        "adv_roots": set(),
+        "adv_lemmas": set(),
+        "general_lemmas": set(),
+        "potential_stems": set(),
+        "unprocessed_or_ambiguous": set() # Words for which no clear base form was found
+    }
+
+    if not all_dictionary_words:
+        print("No words to process.")
+    else:
+        print(f"\nProcessing {len(all_dictionary_words)} words with MIN_STEM_LENGTH_PARAM = {MIN_STEM_LENGTH_PARAM}...")
+        for i, word_to_process in enumerate(all_dictionary_words):
+            if (i + 1) % 10000 == 0:
+                print(f"Processed {i + 1}/{len(all_dictionary_words)} words...")
+
+            processed_forms = process_word(word_to_process, all_dictionary_words, categorized_suffixes, MIN_STEM_LENGTH_PARAM)
+            
+            form_added = False
+            if processed_forms["verb_base"]:
+                results["verb_bases"].add(processed_forms["verb_base"])
+                form_added = True
+            if processed_forms["verb_lemma"]:
+                results["verb_lemmas"].add(processed_forms["verb_lemma"])
+                form_added = True
+            if processed_forms["noun_singular"]:
+                results["noun_singulars"].add(processed_forms["noun_singular"])
+                form_added = True
+            if processed_forms["noun_lemma"]: # Often same as singular for this heuristic
+                results["noun_lemmas"].add(processed_forms["noun_lemma"])
+                form_added = True
+            if processed_forms["adj_basic"]:
+                results["adj_basics"].add(processed_forms["adj_basic"])
+                form_added = True
+            if processed_forms["adj_lemma"]:
+                results["adj_lemmas"].add(processed_forms["adj_lemma"])
+                form_added = True
+            if processed_forms["adv_root"]:
+                results["adv_roots"].add(processed_forms["adv_root"])
+                form_added = True
+            if processed_forms["adv_lemma"]:
+                results["adv_lemmas"].add(processed_forms["adv_lemma"])
+                form_added = True
+            if processed_forms["general_lemma"]:
+                results["general_lemmas"].update(processed_forms["general_lemma"]) # it's a set
+                form_added = True
+            if processed_forms["potential_stem"]:
+                results["potential_stems"].add(processed_forms["potential_stem"])
+                form_added = True # Even if only a stem is found
+
+            if not form_added and word_to_process not in results["general_lemmas"]:
+                 # If after all processing, the original word itself wasn't added as a lemma
+                 # (e.g. it's a very short word or doesn't fit patterns)
+                 # and no other specific form was derived, mark it.
+                 # This category might also catch words that are simply not Azerbaijani
+                 # or don't conform to the heuristic rules.
+                 results["unprocessed_or_ambiguous"].add(word_to_process)
+
+
+        print("\n--- Extraction Summary ---")
+        for category, item_set in results.items():
+            print(f"Found {len(item_set)} candidate {category.replace('_', ' ')}.")
+            try:
+                with open(f"{output_filepath_base}_{category}.txt", 'w', encoding='utf-8') as f:
+                    for item in sorted(list(item_set)):
+                        f.write(item + "\n")
+                print(f"Saved {category} to {output_filepath_base}_{category}.txt")
+            except IOError as e:
+                print(f"Error writing {category} to file: {e}")
+
+        # Example of how to see which original words led to a specific stem (more advanced analysis)
+        # This would require storing the mapping during processing.
+        # For now, we just output the unique sets.

@@ -1,0 +1,30 @@
+{
+  "книга": {
+    "POS": "NOUN",
+    "Features": {
+      "Gender": "Fem",
+      "Number": "Sing",
+      "Case": "Nom"
+    }
+  },
+  "читает": {
+    "POS": "VERB",
+    "Features": {
+      "Tense": "Pres",
+      "Person": "3",
+      "Number": "Sing"
+    }
+  },
+  "красивый": {
+    "POS": "ADJ",
+    "Features": {
+      "Degree": "Pos",
+      "Gender": "Masc",
+      "Case": "Nom"
+    }
+  },
+  "дома": {
+    "POS": "ADV",
+    "Features": {}
+  }
+}

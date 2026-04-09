@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ _('Azerbaijani Morphological Analyzer') }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+    {% include 'theme_toggle.html' %}
+    <header>
+        <div class="brand">
+            <div class="brand-badge">M</div>
+            <div>
+                <div class="muted" style="font-size:0.85rem;">{{ _('Morphology Suite') }}</div>
+                <div>{{ _('Home') }}</div>
+            </div>
+        </div>
+        <nav>
+            <a class="pill is-active" href="{{ url_for('index') }}">{{ _('Home') }}</a>
+            <a class="pill" href="/az-word-parser">{{ _('Word Parser') }}</a>
+            <a class="pill" href="/sentence-analyzer">{{ _('Sentence Analyzer') }}</a>
+            {% if session.get('user') %}
+            <a class="pill" href="{{ url_for('dashboard.dashboard') }}">{{ _('Dashboard') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.admin_dashboard') }}">{{ _('Admin') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_dictionaries') }}">{{ _('Dictionaries') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_affixes') }}">{{ _('Affixes') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_rules') }}">{{ _('Rules') }}</a>
+            {% endif %}
+        </nav>
+        <div class="session">
+            <select class="lang-select" onchange="window.location.href='/set_language/'+this.value">
+                <option value="az" {% if get_locale()=='az' %}selected{% endif %}>AZ</option>
+                <option value="ru" {% if get_locale()=='ru' %}selected{% endif %}>RU</option>
+                <option value="tr" {% if get_locale()=='tr' %}selected{% endif %}>TR</option>
+                <option value="en" {% if get_locale()=='en' %}selected{% endif %}>EN</option>
+            </select>
+            {% if session.get('user') %}
+            <span class="muted">{{ session.get('user') }}</span>
+            <a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a>
+            {% else %}
+            <a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div>
+                <div class="chip">{{ _('Multilingual morphological toolkit') }}</div>
+                <h1>{{ _('Analyze, curate, and monitor your corpus in one place.') }}</h1>
+                <p>{{ _('Switch languages, parse words and sentences, and manage dictionaries with the same streamlined interface.') }}</p>
+                <div style="display:flex;gap:0.7rem;flex-wrap:wrap;margin-top:1.1rem;">
+                    <a class="cta" href="/az-word-parser">{{ _('Word Analyzer') }}</a>
+                    <a class="cta" href="/sentence-analyzer">{{ _('Sentence Analyzer') }}</a>
+                    <a class="btn secondary" href="{{ url_for('dashboard.dashboard') }}">{{ _('Dashboard') }}</a>
+                </div>
+            </div>
+            <div class="card" style="background:linear-gradient(160deg,rgba(62,212,177,0.18),rgba(18,42,66,0.95));">
+                <h3 style="margin:0 0 0.3rem;">{{ _('Quick links') }}</h3>
+                <div class="muted" style="margin-bottom:0.8rem;">{{ _('Jump into the most used tools') }}</div>
+                <div style="display:grid;gap:0.5rem;">
+                    <a class="cta" href="/az-word-parser">{{ _('Word Analyzer') }}</a>
+                    <a class="cta" href="/sentence-analyzer">{{ _('Sentence Analyzer') }}</a>
+                    <a class="btn secondary" href="{{ url_for('dashboard.dashboard') }}">{{ _('Open Dashboard') }}</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid stats" style="margin-top:1.4rem;">
+            <div class="card">
+                <h3>{{ _('Azerbaijani Word Analyzer') }}</h3>
+                <p class="muted">{{ _('Parse words into root, affixes and tags.') }}</p>
+                <a class="cta" href="/az-word-parser">{{ _('Go to Word Analyzer') }}</a>
+            </div>
+            <div class="card">
+                <h3>{{ _('Sentence Morphological Analyzer') }}</h3>
+                <p class="muted">{{ _('Token-level POS and features for full sentences.') }}</p>
+                <a class="cta" href="/sentence-analyzer">{{ _('Go to Sentence Analyzer') }}</a>
+            </div>
+            <div class="card">
+                <h3>{{ _('Admin Dashboard') }}</h3>
+                <p class="muted">{{ _('Monitor corpus stats and switch dictionaries quickly.') }}</p>
+                <a class="cta" href="{{ url_for('dashboard.dashboard') }}">{{ _('Open Dashboard') }}</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

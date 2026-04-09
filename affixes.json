@@ -1,0 +1,438 @@
+{
+  "ır": {
+    "tag": "PRS",
+    "pos": "suffix"
+  },
+  "ir": {
+    "tag": "PRS",
+    "pos": "suffix"
+  },
+  "ur": {
+    "tag": "PRS",
+    "pos": "suffix"
+  },
+  "ür": {
+    "tag": "PRS",
+    "pos": "suffix"
+  },
+  "acaq": {
+    "tag": "FUT",
+    "pos": "suffix"
+  },
+  "əcək": {
+    "tag": "FUT",
+    "pos": "suffix"
+  },
+  "dı": {
+    "tag": "PAST",
+    "pos": "suffix"
+  },
+  "di": {
+    "tag": "PAST",
+    "pos": "suffix"
+  },
+  "du": {
+    "tag": "PAST",
+    "pos": "suffix"
+  },
+  "dü": {
+    "tag": "PAST",
+    "pos": "suffix"
+  },
+  "tı": {
+    "tag": "PAST",
+    "pos": "suffix"
+  },
+  "ti": {
+    "tag": "PAST",
+    "pos": "suffix"
+  },
+  "tu": {
+    "tag": "PAST",
+    "pos": "suffix"
+  },
+  "tü": {
+    "tag": "PAST",
+    "pos": "suffix"
+  },
+  "mış": {
+    "tag": "EVID",
+    "pos": "suffix"
+  },
+  "miş": {
+    "tag": "EVID",
+    "pos": "suffix"
+  },
+  "muş": {
+    "tag": "EVID",
+    "pos": "suffix"
+  },
+  "müş": {
+    "tag": "EVID",
+    "pos": "suffix"
+  },
+  "sa": {
+    "tag": "COND",
+    "pos": "suffix"
+  },
+  "sə": {
+    "tag": "COND",
+    "pos": "suffix"
+  },
+  "ar": {
+    "tag": "AOR",
+    "pos": "suffix"
+  },
+  "ər": {
+    "tag": "AOR",
+    "pos": "suffix"
+  },
+  "maz": {
+    "tag": "NEG.AOR",
+    "pos": "suffix"
+  },
+  "məz": {
+    "tag": "NEG.AOR",
+    "pos": "suffix"
+  },
+  "malı": {
+    "tag": "NEC",
+    "pos": "suffix"
+  },
+  "məli": {
+    "tag": "NEC",
+    "pos": "suffix"
+  },
+  "ma": {
+    "tag": "NEG",
+    "pos": "suffix"
+  },
+  "mə": {
+    "tag": "NEG",
+    "pos": "suffix"
+  },
+  "dır": {
+    "tag": "CAUS",
+    "pos": "suffix"
+  },
+  "dir": {
+    "tag": "CAUS",
+    "pos": "suffix"
+  },
+  "dur": {
+    "tag": "CAUS",
+    "pos": "suffix"
+  },
+  "dür": {
+    "tag": "CAUS",
+    "pos": "suffix"
+  },
+  "t": {
+    "tag": "CAUS",
+    "pos": "suffix"
+  },
+  "ıl": {
+    "tag": "PASS",
+    "pos": "suffix"
+  },
+  "il": {
+    "tag": "PASS",
+    "pos": "suffix"
+  },
+  "ul": {
+    "tag": "PASS",
+    "pos": "suffix"
+  },
+  "ül": {
+    "tag": "PASS",
+    "pos": "suffix"
+  },
+  "n": {
+    "tag": "REFL",
+    "pos": "suffix"
+  },
+  "in": {
+    "tag": "POSS.2SG",
+    "pos": "suffix"
+  },
+  "ı": {
+    "tag": "POSS.3SG",
+    "pos": "suffix"
+  },
+  "i": {
+    "tag": "POSS.3SG",
+    "pos": "suffix"
+  },
+  "u": {
+    "tag": "POSS.3SG",
+    "pos": "suffix"
+  },
+  "ü": {
+    "tag": "POSS.3SG",
+    "pos": "suffix"
+  },
+  "a": {
+    "tag": "DAT",
+    "pos": "suffix"
+  },
+  "ə": {
+    "tag": "DAT",
+    "pos": "suffix"
+  },
+  "da": {
+    "tag": "LOC",
+    "pos": "suffix"
+  },
+  "də": {
+    "tag": "LOC",
+    "pos": "suffix"
+  },
+  "ta": {
+    "tag": "LOC",
+    "pos": "suffix"
+  },
+  "tə": {
+    "tag": "LOC",
+    "pos": "suffix"
+  },
+  "dan": {
+    "tag": "ABL",
+    "pos": "suffix"
+  },
+  "dən": {
+    "tag": "ABL",
+    "pos": "suffix"
+  },
+  "tan": {
+    "tag": "ABL",
+    "pos": "suffix"
+  },
+  "tən": {
+    "tag": "ABL",
+    "pos": "suffix"
+  },
+  "ın": {
+    "tag": "POSS.2SG",
+    "pos": "suffix"
+  },
+  "un": {
+    "tag": "POSS.2SG",
+    "pos": "suffix"
+  },
+  "ün": {
+    "tag": "POSS.2SG",
+    "pos": "suffix"
+  },
+  "la": {
+    "tag": "INSTR",
+    "pos": "suffix"
+  },
+  "lə": {
+    "tag": "INSTR",
+    "pos": "suffix"
+  },
+  "lar": {
+    "tag": "PERS.3PL",
+    "pos": "suffix"
+  },
+  "lər": {
+    "tag": "PERS.3PL",
+    "pos": "suffix"
+  },
+  "ım": {
+    "tag": "POSS.1SG",
+    "pos": "suffix"
+  },
+  "im": {
+    "tag": "POSS.1SG",
+    "pos": "suffix"
+  },
+  "um": {
+    "tag": "POSS.1SG",
+    "pos": "suffix"
+  },
+  "üm": {
+    "tag": "POSS.1SG",
+    "pos": "suffix"
+  },
+  "ımız": {
+    "tag": "POSS.1PL",
+    "pos": "suffix"
+  },
+  "imiz": {
+    "tag": "POSS.1PL",
+    "pos": "suffix"
+  },
+  "umuz": {
+    "tag": "POSS.1PL",
+    "pos": "suffix"
+  },
+  "ümüz": {
+    "tag": "POSS.1PL",
+    "pos": "suffix"
+  },
+  "ınız": {
+    "tag": "POSS.2PL",
+    "pos": "suffix"
+  },
+  "iniz": {
+    "tag": "POSS.2PL",
+    "pos": "suffix"
+  },
+  "unuz": {
+    "tag": "POSS.2PL",
+    "pos": "suffix"
+  },
+  "ünüz": {
+    "tag": "POSS.2PL",
+    "pos": "suffix"
+  },
+  "ları": {
+    "tag": "POSS.3PL",
+    "pos": "suffix"
+  },
+  "ləri": {
+    "tag": "POSS.3PL",
+    "pos": "suffix"
+  },
+  "am": {
+    "tag": "PERS.1SG",
+    "pos": "suffix"
+  },
+  "əm": {
+    "tag": "PERS.1SG",
+    "pos": "suffix"
+  },
+  "san": {
+    "tag": "PERS.2SG",
+    "pos": "suffix"
+  },
+  "sən": {
+    "tag": "PERS.2SG",
+    "pos": "suffix"
+  },
+  "ıq": {
+    "tag": "PERS.1PL",
+    "pos": "suffix"
+  },
+  "ik": {
+    "tag": "PERS.1PL",
+    "pos": "suffix"
+  },
+  "uq": {
+    "tag": "PERS.1PL",
+    "pos": "suffix"
+  },
+  "ük": {
+    "tag": "PERS.1PL",
+    "pos": "suffix"
+  },
+  "sınız": {
+    "tag": "PERS.2PL",
+    "pos": "suffix"
+  },
+  "siniz": {
+    "tag": "PERS.2PL",
+    "pos": "suffix"
+  },
+  "sunuz": {
+    "tag": "PERS.2PL",
+    "pos": "suffix"
+  },
+  "sünüz": {
+    "tag": "PERS.2PL",
+    "pos": "suffix"
+  },
+  "lıq": {
+    "tag": "NMLZ",
+    "pos": "suffix"
+  },
+  "lik": {
+    "tag": "NMLZ",
+    "pos": "suffix"
+  },
+  "luq": {
+    "tag": "NMLZ",
+    "pos": "suffix"
+  },
+  "lük": {
+    "tag": "NMLZ",
+    "pos": "suffix"
+  },
+  "lı": {
+    "tag": "ADJ.HAVING",
+    "pos": "suffix"
+  },
+  "li": {
+    "tag": "ADJ.HAVING",
+    "pos": "suffix"
+  },
+  "lu": {
+    "tag": "ADJ.HAVING",
+    "pos": "suffix"
+  },
+  "lü": {
+    "tag": "ADJ.HAVING",
+    "pos": "suffix"
+  },
+  "sız": {
+    "tag": "ADJ.WITHOUT",
+    "pos": "suffix"
+  },
+  "siz": {
+    "tag": "ADJ.WITHOUT",
+    "pos": "suffix"
+  },
+  "suz": {
+    "tag": "ADJ.WITHOUT",
+    "pos": "suffix"
+  },
+  "süz": {
+    "tag": "ADJ.WITHOUT",
+    "pos": "suffix"
+  },
+  "çı": {
+    "tag": "AGENT",
+    "pos": "suffix"
+  },
+  "çi": {
+    "tag": "AGENT",
+    "pos": "suffix"
+  },
+  "çu": {
+    "tag": "AGENT",
+    "pos": "suffix"
+  },
+  "çü": {
+    "tag": "AGENT",
+    "pos": "suffix"
+  },
+  "cı": {
+    "tag": "AGENT",
+    "pos": "suffix"
+  },
+  "ci": {
+    "tag": "AGENT",
+    "pos": "suffix"
+  },
+  "cu": {
+    "tag": "AGENT",
+    "pos": "suffix"
+  },
+  "cü": {
+    "tag": "AGENT",
+    "pos": "suffix"
+  },
+  "daş": {
+    "tag": "COMIT",
+    "pos": "suffix"
+  },
+  "ləş": {
+    "tag": "BECOME",
+    "pos": "suffix"
+  },
+  "laş": {
+    "tag": "BECOME",
+    "pos": "suffix"
+  }
+}

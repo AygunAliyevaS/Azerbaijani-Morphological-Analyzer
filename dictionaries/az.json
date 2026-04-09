@@ -1,0 +1,4 @@
+{
+  "kitab": {"POS": "NOUN", "Features": {"Case": "Nom", "Number": "Sing"}},
+  "oxuyur": {"POS": "VERB", "Features": {"Tense": "Pres", "Person": "3"}}
+}

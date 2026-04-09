@@ -1,0 +1,29 @@
+{
+  "kitap": {
+    "POS": "NOUN",
+    "Features": {
+      "Case": "Nom",
+      "Number": "Sing"
+    }
+  },
+  "okuyor": {
+    "POS": "VERB",
+    "Features": {
+      "Tense": "Pres",
+      "Person": "3"
+    }
+  },
+  "güzel": {
+    "POS": "ADJ",
+    "Features": {
+      "Degree": "Pos"
+    }
+  },
+  "evde": {
+    "POS": "NOUN",
+    "Features": {
+      "Case": "Loc",
+      "Number": "Sing"
+    }
+  }
+}

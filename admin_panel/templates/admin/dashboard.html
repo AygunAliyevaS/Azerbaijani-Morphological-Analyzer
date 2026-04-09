@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ _('Admin Panel') }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+    {% include '../../theme_toggle.html' %}
+    <header>
+        <div class="brand">
+            <div class="brand-badge">M</div>
+            <div>
+                <div class="muted" style="font-size:0.85rem;">{{ _('Morphology Suite') }}</div>
+                <div>{{ _('Admin Panel') }}</div>
+            </div>
+        </div>
+        <nav aria-label="Primary navigation">
+            <a class="pill" href="{{ url_for('index') }}">{{ _('Home') }}</a>
+            <a class="pill" href="/az-word-parser">{{ _('Word Parser') }}</a>
+            <a class="pill" href="/sentence-analyzer">{{ _('Sentence Analyzer') }}</a>
+            <a class="pill" href="{{ url_for('dashboard.dashboard') }}">{{ _('Dashboard') }}</a>
+            <a class="pill is-active" href="{{ url_for('admin_panel.admin_dashboard') }}">{{ _('Admin') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_dictionaries') }}">{{ _('Dictionaries') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_affixes') }}">{{ _('Affixes') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_rules') }}">{{ _('Rules') }}</a>
+        </nav>
+        <div class="session">
+            <select class="lang-select" onchange="window.location.href='/set_language/'+this.value">
+                <option value="az" {% if get_locale()=='az' %}selected{% endif %}>AZ</option>
+                <option value="ru" {% if get_locale()=='ru' %}selected{% endif %}>RU</option>
+                <option value="tr" {% if get_locale()=='tr' %}selected{% endif %}>TR</option>
+                <option value="en" {% if get_locale()=='en' %}selected{% endif %}>EN</option>
+            </select>
+            {% if session.get('user') %}
+            <span class="muted">{{ session.get('user') }}</span>
+            <a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a>
+            {% else %}
+            <a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div>
+                <div class="chip">{{ _('Administration overview') }}</div>
+                <h1>{{ _('Control center for dictionaries, affixes and rules') }}</h1>
+                <p>{{ _('Jump directly into data curation, keep an eye on corpus size, and maintain linguistic rules from one place.') }}</p>
+            </div>
+            <div class="card" style="background:linear-gradient(160deg,rgba(62,212,177,0.2),rgba(18,42,66,0.95));">
+                <div class="section-header">
+                    <h2>{{ _('Totals') }}</h2>
+                    <span class="muted">{{ _('Live on page load') }}</span>
+                </div>
+                <div class="grid stats">
+                    <div>
+                        <div class="muted">{{ _('Affixes') }}</div>
+                        <div class="metric">{{ stats.affixes }}</div>
+                    </div>
+                    <div>
+                        <div class="muted">{{ _('Rules') }}</div>
+                        <div class="metric">{{ stats.rules }}</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid stats" style="margin-top:1.2rem;">
+            <div class="card">
+                <div class="muted">{{ _('Azerbaijani entries') }}</div>
+                <div class="metric">{{ stats.dictionaries.az }}<small>{{ _('words') }}</small></div>
+            </div>
+            <div class="card">
+                <div class="muted">{{ _('Turkish entries') }}</div>
+                <div class="metric">{{ stats.dictionaries.tr }}<small>{{ _('words') }}</small></div>
+            </div>
+            <div class="card">
+                <div class="muted">{{ _('Russian entries') }}</div>
+                <div class="metric">{{ stats.dictionaries.ru }}<small>{{ _('words') }}</small></div>
+            </div>
+        </section>
+
+        <section style="margin-top:1.4rem;">
+            <div class="section-header">
+                <h2>{{ _('Quick actions') }}</h2>
+                <span class="muted">{{ _('Go straight to edit screens') }}</span>
+            </div>
+            <div class="actions">
+                <div class="action-card">
+                    <div class="section-header" style="margin-bottom:0.3rem;">
+                        <h3>{{ _('Manage dictionaries') }}</h3>
+                        <span class="muted">{{ _('AZ / TR / RU') }}</span>
+                    </div>
+                    <p class="muted">{{ _('Update lemmas, parts of speech and feature sets for each language.') }}</p>
+                    <footer>
+                        <a class="btn" href="{{ url_for('admin_panel.manage_dictionaries') }}">{{ _('Open dictionaries') }}</a>
+                    </footer>
+                </div>
+                <div class="action-card">
+                    <div class="section-header" style="margin-bottom:0.3rem;">
+                        <h3>{{ _('Affixes inventory') }}</h3>
+                        <span class="muted">{{ _('Tags &amp; POS') }}</span>
+                    </div>
+                    <p class="muted">{{ _('Edit or append derivational and inflectional affixes used by the analyzer.') }}</p>
+                    <footer>
+                        <a class="btn" href="{{ url_for('admin_panel.manage_affixes') }}">{{ _('Open affixes') }}</a>
+                    </footer>
+                </div>
+                <div class="action-card">
+                    <div class="section-header" style="margin-bottom:0.3rem;">
+                        <h3>{{ _('Rule sets') }}</h3>
+                        <span class="muted">{{ _('Morphological rules') }}</span>
+                    </div>
+                    <p class="muted">{{ _('Maintain tagging rules and examples for the selected languages.') }}</p>
+                    <footer>
+                        <a class="btn" href="{{ url_for('admin_panel.manage_rules') }}">{{ _('Open rules') }}</a>
+                    </footer>
+                </div>
+            </div>
+        </section>
+
+        <section style="margin-top:1.4rem;">
+            <div class="section-header">
+                <h2>{{ _('Need the dashboard tools?') }}</h2>
+                <a class="btn secondary" href="{{ url_for('dashboard.dashboard') }}">{{ _('Open analyzer dashboard') }}</a>
+            </div>
+            <p class="muted">{{ _('Use the analyzer dashboard to inspect stats and run quick checks without leaving admin.') }}</p>
+        </section>
+    </main>
+</body>
+</html>

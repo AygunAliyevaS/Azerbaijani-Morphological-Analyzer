@@ -1,0 +1,171 @@
+{
+  "az_rules": [
+    {
+      "tag": "PLURAL",
+      "desc": "Cəm şəkilçisi (-lar/-lər)",
+      "example": "kitablar, evlər"
+    },
+    {
+      "tag": "POSS.1SG",
+      "desc": "1-ci şəxs tək iyelik (-ım/-im/-um/-üm)",
+      "example": "kitabım, evim"
+    },
+    {
+      "tag": "POSS.2SG",
+      "desc": "2-ci şəxs tək iyelik (-ın/-in/-un/-ün)",
+      "example": "kitabın, evin"
+    },
+    {
+      "tag": "POSS.3SG",
+      "desc": "3-cü şəxs tək iyelik (-ı/-i/-u/-ü)",
+      "example": "kitabı, evi"
+    },
+    {
+      "tag": "POSS.1PL",
+      "desc": "1-ci şəxs cəm iyelik (-ımız/-imiz/-umuz/-ümüz)",
+      "example": "kitabımız, evimiz"
+    },
+    {
+      "tag": "POSS.2PL",
+      "desc": "2-ci şəxs cəm iyelik (-ınız/-iniz/-unuz/-ünüz)",
+      "example": "kitabınız, eviniz"
+    },
+    {
+      "tag": "POSS.3PL",
+      "desc": "3-cü şəxs cəm iyelik (-ları/-ləri)",
+      "example": "kitabları, evləri"
+    },
+    {
+      "tag": "CASE.NOM",
+      "desc": "Nominativ hal (əsas)",
+      "example": "kitab, ev"
+    },
+    {
+      "tag": "CASE.ACC",
+      "desc": "Təsirlik halı (-ı/-i/-u/-ü)",
+      "example": "kitabı, evi"
+    },
+    {
+      "tag": "CASE.DAT",
+      "desc": "Yönlük halı (-a/-ə)",
+      "example": "kitaba, evə"
+    },
+    {
+      "tag": "CASE.LOC",
+      "desc": "Yerlik halı (-da/-də)",
+      "example": "kitabda, evdə"
+    },
+    {
+      "tag": "CASE.ABL",
+      "desc": "Çıxışlıq halı (-dan/-dən)",
+      "example": "kitabdan, evdən"
+    },
+    {
+      "tag": "CASE.GEN",
+      "desc": "Yiyəlik halı (-ın/-in/-un/-ün)",
+      "example": "kitabın, evin"
+    },
+    {
+      "tag": "BECOME",
+      "desc": "Sözyaradıcı: olmaq, fel düzəldən (-laş/-ləş)",
+      "example": "gözəlləşmək"
+    },
+    {
+      "tag": "CAUS",
+      "desc": "İcbar növü (kiməsə nəyisə etdirmək)",
+      "example": "yazdırmaq"
+    },
+    {
+      "tag": "PASS",
+      "desc": "Məchul növ (kiminsə tərəfindən edilmək)",
+      "example": "yazılmaq"
+    },
+    {
+      "tag": "REFL",
+      "desc": "Qayıdış/Qarşılıq növü (özünə/bir-birinə etmək)",
+      "example": "yuyunmaq"
+    },
+    {
+      "tag": "FUT",
+      "desc": "Gələcək zaman",
+      "example": "yazacaq"
+    },
+    {
+      "tag": "EVID",
+      "desc": "Nəqli keçmiş zaman",
+      "example": "yazıbmış"
+    },
+    {
+      "tag": "PAST",
+      "desc": "Şühudi keçmiş zaman",
+      "example": "yazdı"
+    },
+    {
+      "tag": "AOR",
+      "desc": "Qeyri-qəti gələcək/geniş zaman",
+      "example": "yazar"
+    },
+    {
+      "tag": "NEC",
+      "desc": "Vacib şəkli (etməli, gərək)",
+      "example": "yazmalı"
+    },
+    {
+      {
+        "az_rules": [
+          {"tag": "PLURAL", "desc": "Cəm şəkilçisi (-lar/-lər)", "example": "kitablar, evlər"},
+          {"tag": "POSS.1SG", "desc": "1-ci şəxs tək iyelik (-ım/-im/-um/-üm)", "example": "kitabım, evim"},
+          {"tag": "POSS.2SG", "desc": "2-ci şəxs tək iyelik (-ın/-in/-un/-ün)", "example": "kitabın, evin"},
+          {"tag": "POSS.3SG", "desc": "3-cü şəxs tək iyelik (-ı/-i/-u/-ü)", "example": "kitabı, evi"},
+          {"tag": "POSS.1PL", "desc": "1-ci şəxs cəm iyelik (-ımız/-imiz/-umuz/-ümüz)", "example": "kitabımız, evimiz"},
+          {"tag": "POSS.2PL", "desc": "2-ci şəxs cəm iyelik (-ınız/-iniz/-unuz/-ünüz)", "example": "kitabınız, eviniz"},
+          {"tag": "POSS.3PL", "desc": "3-cü şəxs cəm iyelik (-ları/-ləri)", "example": "kitabları, evləri"},
+          {"tag": "CASE.NOM", "desc": "Nominativ hal (əsas)", "example": "kitab, ev"},
+          {"tag": "CASE.ACC", "desc": "Təsirlik halı (-ı/-i/-u/-ü)", "example": "kitabı, evi"},
+          {"tag": "CASE.DAT", "desc": "Yönlük halı (-a/-ə)", "example": "kitaba, evə"},
+          {"tag": "CASE.LOC", "desc": "Yerlik halı (-da/-də)", "example": "kitabda, evdə"},
+          {"tag": "CASE.ABL", "desc": "Çıxışlıq halı (-dan/-dən)", "example": "kitabdan, evdən"},
+          {"tag": "CASE.GEN", "desc": "Yiyəlik halı (-ın/-in/-un/-ün)", "example": "kitabın, evin"},
+          {"tag": "BECOME", "desc": "Sözyaradıcı: olmaq, fel düzəldən (-laş/-ləş)", "example": "gözəlləşmək"},
+          {"tag": "CAUS", "desc": "İcbar növü (kiməsə nəyisə etdirmək)", "example": "yazdırmaq"},
+          {"tag": "PASS", "desc": "Məchul növ (kiminsə tərəfindən edilmək)", "example": "yazılmaq"},
+          {"tag": "REFL", "desc": "Qayıdış/Qarşılıq növü (özünə/bir-birinə etmək)", "example": "yuyunmaq"},
+          {"tag": "FUT", "desc": "Gələcək zaman", "example": "yazacaq"},
+          {"tag": "EVID", "desc": "Nəqli keçmiş zaman", "example": "yazıbmış"},
+          {"tag": "PAST", "desc": "Şühudi keçmiş zaman", "example": "yazdı"},
+          {"tag": "AOR", "desc": "Qeyri-qəti gələcək/geniş zaman", "example": "yazar"},
+          {"tag": "NEC", "desc": "Vacib şəkli (etməli, gərək)", "example": "yazmalı"},
+          {"tag": "NEG.AOR", "desc": "İnkar qeyri-qəti gələcək/geniş zaman", "example": "yazmaz"},
+          {"tag": "COND", "desc": "Şərt şəkli (əgər/nə vaxtsa)", "example": "yazsa"},
+          {"tag": "NEG", "desc": "Ümumi inkar", "example": "yazmır"},
+          {"tag": "PRS", "desc": "İndiki zaman", "example": "yazır"},
+          {"tag": "PERS.1SG", "desc": "1-ci şəxs tək (mübtəda)", "example": "yazıram"},
+          {"tag": "PERS.2SG", "desc": "2-ci şəxs tək (mübtəda)", "example": "yazırsan"},
+          {"tag": "PERS.1PL", "desc": "1-ci şəxs cəm (mübtəda)", "example": "yazırıq"},
+          {"tag": "PERS.2PL", "desc": "2-ci şəxs cəm (mübtəda)", "example": "yazırsınız"},
+          {"tag": "PERS.3PL", "desc": "3-cü şəxs cəm (mübtəda)", "example": "yazırlar"},
+          {"tag": "INSTR", "desc": "Alətlik halı (ilə/vasitəsilə)", "example": "qələmlə"}
+        ],
+        "valid_order": [
+          "CAUS",
+          "PASS",
+          "FUT",
+          "EVID",
+          "PAST",
+          "COND",
+          "NEG",
+          "PRS",
+          "INSTR"
+        ]
+      }
+    "CAUS",
+    "PASS",
+    "FUT",
+    "EVID",
+    "PAST",
+    "COND",
+    "NEG",
+    "PRS",
+    "INSTR"
+  ]
+}

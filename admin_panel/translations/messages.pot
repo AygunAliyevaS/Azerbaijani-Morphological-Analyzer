@@ -1,0 +1,693 @@
+# Translations template for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-04-09 12:10+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: admin_panel/app.py:44 admin_panel/templates/admin/affixes.html:84
+#: admin_panel/templates/admin/dashboard.html:203
+#: admin_panel/templates/admin/dictionaries.html:81
+#: admin_panel/templates/admin/rules.html:78
+#: admin_panel/templates/affixes.html:28
+#: admin_panel/templates/az_word_parser.html:32
+#: admin_panel/templates/dashboard.html:213
+#: admin_panel/templates/dictionary.html:28
+#: admin_panel/templates/index.html:131 admin_panel/templates/index.html:164
+#: admin_panel/templates/rules.html:28
+#: admin_panel/templates/sentence_analyzer.html:34
+msgid "Dashboard"
+msgstr ""
+
+#: admin_panel/templates/affixes.html:5 admin_panel/templates/affixes.html:36
+msgid "Affixes Management"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:86
+#: admin_panel/templates/admin/affixes.html:97
+#: admin_panel/templates/admin/dashboard.html:206
+#: admin_panel/templates/admin/dashboard.html:233
+#: admin_panel/templates/admin/dictionaries.html:83
+#: admin_panel/templates/admin/rules.html:80
+#: admin_panel/templates/affixes.html:25 admin_panel/templates/affixes.html:29
+#: admin_panel/templates/az_word_parser.html:33
+#: admin_panel/templates/dashboard.html:214
+#: admin_panel/templates/dashboard.html:240
+#: admin_panel/templates/dictionary.html:29
+#: admin_panel/templates/index.html:132 admin_panel/templates/rules.html:29
+#: admin_panel/templates/sentence_analyzer.html:35
+msgid "Affixes"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:83
+#: admin_panel/templates/admin/dashboard.html:202
+#: admin_panel/templates/admin/dictionaries.html:80
+#: admin_panel/templates/admin/rules.html:77
+#: admin_panel/templates/affixes.html:27
+#: admin_panel/templates/az_word_parser.html:29
+#: admin_panel/templates/dashboard.html:212
+#: admin_panel/templates/dictionary.html:27
+#: admin_panel/templates/index.html:123 admin_panel/templates/index.html:127
+#: admin_panel/templates/rules.html:27
+#: admin_panel/templates/sentence_analyzer.html:31
+msgid "Home"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:87
+#: admin_panel/templates/admin/dashboard.html:207
+#: admin_panel/templates/admin/dashboard.html:237
+#: admin_panel/templates/admin/dictionaries.html:84
+#: admin_panel/templates/admin/rules.html:81
+#: admin_panel/templates/admin/rules.html:91
+#: admin_panel/templates/affixes.html:30
+#: admin_panel/templates/az_word_parser.html:34
+#: admin_panel/templates/dashboard.html:215
+#: admin_panel/templates/dashboard.html:244
+#: admin_panel/templates/dictionary.html:30
+#: admin_panel/templates/index.html:133 admin_panel/templates/rules.html:25
+#: admin_panel/templates/rules.html:30
+#: admin_panel/templates/sentence_analyzer.html:36
+msgid "Rules"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:204
+#: admin_panel/templates/affixes.html:31
+#: admin_panel/templates/az_word_parser.html:35
+#: admin_panel/templates/dashboard.html:216
+#: admin_panel/templates/index.html:134 admin_panel/templates/rules.html:31
+#: admin_panel/templates/sentence_analyzer.html:37
+msgid "Admin"
+msgstr ""
+
+#: admin_panel/templates/affixes.html:37
+msgid "Edit JSON, then save to persist changes."
+msgstr ""
+
+#: admin_panel/templates/affixes.html:49
+#: admin_panel/templates/dictionary.html:49 admin_panel/templates/rules.html:49
+msgid "Save"
+msgstr ""
+
+#: admin_panel/templates/az_word_parser.html:5
+msgid "Azerbaijani Word Parser"
+msgstr ""
+
+#: admin_panel/templates/az_word_parser.html:27
+#: admin_panel/templates/az_word_parser.html:30
+#: admin_panel/templates/index.html:128
+#: admin_panel/templates/sentence_analyzer.html:32
+msgid "Word Parser"
+msgstr ""
+
+#: admin_panel/templates/az_word_parser.html:31
+#: admin_panel/templates/index.html:129 admin_panel/templates/index.html:163
+#: admin_panel/templates/sentence_analyzer.html:29
+#: admin_panel/templates/sentence_analyzer.html:33
+msgid "Sentence Analyzer"
+msgstr ""
+
+#: admin_panel/templates/az_word_parser.html:41
+msgid "Azerbaijani Word Morpheme Parser"
+msgstr ""
+
+#: admin_panel/templates/az_word_parser.html:42
+#: admin_panel/templates/dashboard.html:315
+msgid "Root + affix tags"
+msgstr ""
+
+#: admin_panel/templates/az_word_parser.html:45
+msgid "Enter Azerbaijani word"
+msgstr ""
+
+#: admin_panel/templates/az_word_parser.html:46
+msgid "Type a word..."
+msgstr ""
+
+#: admin_panel/templates/az_word_parser.html:47
+msgid "Parse"
+msgstr ""
+
+#: admin_panel/templates/az_word_parser.html:51
+msgid "Result"
+msgstr ""
+
+#: admin_panel/templates/az_word_parser.html:55
+#: admin_panel/templates/dashboard.html:327
+msgid "Root:"
+msgstr ""
+
+#: admin_panel/templates/az_word_parser.html:56
+#: admin_panel/templates/dashboard.html:328
+msgid "Affixes:"
+msgstr ""
+
+#: admin_panel/templates/az_word_parser.html:56
+#: admin_panel/templates/az_word_parser.html:57
+#: admin_panel/templates/dashboard.html:328
+#: admin_panel/templates/dashboard.html:329
+msgid "None"
+msgstr ""
+
+#: admin_panel/templates/az_word_parser.html:57
+#: admin_panel/templates/dashboard.html:329
+msgid "Tags:"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:78
+#: admin_panel/templates/admin/dashboard.html:197
+#: admin_panel/templates/admin/dictionaries.html:75
+#: admin_panel/templates/admin/rules.html:72
+#: admin_panel/templates/dashboard.html:207
+#: admin_panel/templates/index.html:122
+msgid "Morphology Suite"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:208
+msgid "Analyzer Dashboard"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:229
+msgid "Live corpus status"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:230
+msgid "Corpus at a glance"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:231
+msgid ""
+"Switch dictionaries, inspect rules, and run quick morphological checks "
+"without leaving this page."
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:228
+#: admin_panel/templates/dashboard.html:235
+msgid "Totals"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:236
+msgid "Updated on page load"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:246
+#: admin_panel/templates/dashboard.html:253
+msgid "Azerbaijani entries"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:247
+#: admin_panel/templates/admin/dashboard.html:251
+#: admin_panel/templates/admin/dashboard.html:255
+#: admin_panel/templates/dashboard.html:254
+#: admin_panel/templates/dashboard.html:258
+#: admin_panel/templates/dashboard.html:262
+msgid "words"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:250
+#: admin_panel/templates/dashboard.html:257
+msgid "Turkish entries"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:254
+#: admin_panel/templates/dashboard.html:261
+msgid "Russian entries"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:268
+msgid "Select Dictionary"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:269
+msgid "Changes apply instantly"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:272
+#: admin_panel/templates/dictionary.html:25
+#: admin_panel/templates/dictionary.html:31
+msgid "Dictionary"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:278
+msgid "Switch"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:284
+msgid "Rules for Selected Dictionary"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:107
+#: admin_panel/templates/admin/affixes.html:145
+#: admin_panel/templates/admin/rules.html:100
+#: admin_panel/templates/admin/rules.html:125
+#: admin_panel/templates/dashboard.html:291
+msgid "Tag"
+msgstr ""
+
+#: admin_panel/templates/admin/rules.html:101
+#: admin_panel/templates/admin/rules.html:129
+#: admin_panel/templates/dashboard.html:292
+msgid "Description"
+msgstr ""
+
+#: admin_panel/templates/admin/rules.html:102
+#: admin_panel/templates/admin/rules.html:133
+#: admin_panel/templates/dashboard.html:293
+msgid "Example"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:307
+msgid "No rules found for this dictionary."
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:314
+#: admin_panel/templates/index.html:171
+msgid "Azerbaijani Word Analyzer"
+msgstr ""
+
+#: admin_panel/templates/admin/dictionaries.html:103
+#: admin_panel/templates/admin/dictionaries.html:137
+#: admin_panel/templates/dashboard.html:318
+msgid "Word"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:319
+msgid "Enter an Azerbaijani word"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:320
+#: admin_panel/templates/sentence_analyzer.html:50
+msgid "Analyze"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:337
+#: admin_panel/templates/index.html:176
+#: admin_panel/templates/sentence_analyzer.html:5
+#: admin_panel/templates/sentence_analyzer.html:43
+msgid "Sentence Morphological Analyzer"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:338
+msgid "Token-by-token"
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:340
+msgid "Analyze full sentences for POS and morphological features."
+msgstr ""
+
+#: admin_panel/templates/dashboard.html:342
+#: admin_panel/templates/index.html:178
+msgid "Go to Sentence Analyzer"
+msgstr ""
+
+#: admin_panel/templates/dictionary.html:5
+#: admin_panel/templates/dictionary.html:36
+msgid "Dictionary Management"
+msgstr ""
+
+#: admin_panel/templates/dictionary.html:37
+msgid "Edit entries as JSON and save."
+msgstr ""
+
+#: admin_panel/templates/index.html:5
+msgid "Azerbaijani Morphological Analyzer"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:85
+#: admin_panel/templates/admin/dashboard.html:205
+#: admin_panel/templates/admin/dictionaries.html:82
+#: admin_panel/templates/admin/rules.html:79
+#: admin_panel/templates/index.html:135
+msgid "Dictionaries"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:212
+#: admin_panel/templates/index.html:138
+msgid "Logout"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:214
+#: admin_panel/templates/index.html:140 admin_panel/templates/login.html:5
+#: admin_panel/templates/login.html:42
+msgid "Login"
+msgstr ""
+
+#: admin_panel/templates/index.html:154
+msgid "Multilingual morphological toolkit"
+msgstr ""
+
+#: admin_panel/templates/index.html:155
+msgid "Analyze, curate, and monitor your corpus in one place."
+msgstr ""
+
+#: admin_panel/templates/index.html:156
+msgid ""
+"Switch languages, parse words and sentences, and manage dictionaries with"
+" the same streamlined interface."
+msgstr ""
+
+#: admin_panel/templates/index.html:159
+msgid "Quick links"
+msgstr ""
+
+#: admin_panel/templates/index.html:160
+msgid "Jump into the most used tools"
+msgstr ""
+
+#: admin_panel/templates/index.html:162
+msgid "Word Analyzer"
+msgstr ""
+
+#: admin_panel/templates/index.html:172
+msgid "Parse words into root, affixes and tags."
+msgstr ""
+
+#: admin_panel/templates/index.html:173
+msgid "Go to Word Analyzer"
+msgstr ""
+
+#: admin_panel/templates/index.html:177
+msgid "Token-level POS and features for full sentences."
+msgstr ""
+
+#: admin_panel/templates/index.html:181
+msgid "Admin Dashboard"
+msgstr ""
+
+#: admin_panel/templates/index.html:182
+msgid "Monitor corpus stats and switch dictionaries quickly."
+msgstr ""
+
+#: admin_panel/templates/index.html:183
+msgid "Open Dashboard"
+msgstr ""
+
+#: admin_panel/templates/login.html:22
+msgid "Welcome back"
+msgstr ""
+
+#: admin_panel/templates/login.html:23
+msgid "Sign in to manage the corpus."
+msgstr ""
+
+#: admin_panel/templates/login.html:35
+msgid "Username"
+msgstr ""
+
+#: admin_panel/templates/login.html:39
+msgid "Password"
+msgstr ""
+
+#: admin_panel/templates/rules.html:5 admin_panel/templates/rules.html:36
+msgid "Rules Management"
+msgstr ""
+
+#: admin_panel/templates/rules.html:37
+msgid "Edit JSON rule sets for each language."
+msgstr ""
+
+#: admin_panel/templates/sentence_analyzer.html:44
+msgid "Token-by-token POS + features"
+msgstr ""
+
+#: admin_panel/templates/sentence_analyzer.html:47
+msgid "Sentence"
+msgstr ""
+
+#: admin_panel/templates/sentence_analyzer.html:48
+msgid "Enter an Azerbaijani sentence..."
+msgstr ""
+
+#: admin_panel/templates/sentence_analyzer.html:54
+msgid "Token Analysis"
+msgstr ""
+
+#: admin_panel/templates/sentence_analyzer.html:58
+msgid "Token"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:108
+#: admin_panel/templates/admin/dictionaries.html:104
+#: admin_panel/templates/admin/dictionaries.html:141
+#: admin_panel/templates/sentence_analyzer.html:59
+msgid "POS"
+msgstr ""
+
+#: admin_panel/templates/admin/dictionaries.html:105
+#: admin_panel/templates/sentence_analyzer.html:60
+msgid "Features"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:5
+msgid "Affixes · Admin"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:79
+msgid "Admin · Affixes"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:88
+#: admin_panel/templates/admin/dictionaries.html:85
+#: admin_panel/templates/admin/rules.html:82
+msgid "Admin Home"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:96
+msgid "Current inventory"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:99
+#: admin_panel/templates/admin/dictionaries.html:96
+#: admin_panel/templates/admin/rules.html:93
+msgid "total"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:101
+msgid "Edit or delete individual affixes and their tags."
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:106
+#: admin_panel/templates/admin/affixes.html:141
+msgid "Affix"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:109
+#: admin_panel/templates/admin/dictionaries.html:106
+msgid "Action"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:122
+#: admin_panel/templates/admin/dictionaries.html:119
+msgid "Delete"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:135
+msgid "Add new affix"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:136
+msgid "Fields required"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:149
+msgid "POS (optional)"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:153
+msgid "Add affix"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:154
+#: admin_panel/templates/admin/dictionaries.html:150
+#: admin_panel/templates/admin/rules.html:138
+msgid "Back to Admin"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:159
+msgid "Hints"
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:160
+msgid "Use short, unique tags (e.g., PL, POSS) that match your analyzer outputs."
+msgstr ""
+
+#: admin_panel/templates/admin/affixes.html:161
+msgid "POS can help future filtering; leave blank if not needed."
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:5
+#: admin_panel/templates/admin/dashboard.html:198
+msgid "Admin Panel"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:222
+msgid "Administration overview"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:223
+msgid "Control center for dictionaries, affixes and rules"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:224
+msgid ""
+"Jump directly into data curation, keep an eye on corpus size, and "
+"maintain linguistic rules from one place."
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:229
+msgid "Live on page load"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:261
+msgid "Quick actions"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:262
+msgid "Go straight to edit screens"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:267
+msgid "Manage dictionaries"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:268
+msgid "AZ / TR / RU"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:270
+msgid "Update lemmas, parts of speech and feature sets for each language."
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:272
+msgid "Open dictionaries"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:277
+msgid "Affixes inventory"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:278
+msgid "Tags & POS"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:280
+msgid "Edit or append derivational and inflectional affixes used by the analyzer."
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:282
+msgid "Open affixes"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:287
+msgid "Rule sets"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:288
+msgid "Morphological rules"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:290
+msgid "Maintain tagging rules and examples for the selected languages."
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:292
+msgid "Open rules"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:300
+msgid "Need the dashboard tools?"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:301
+msgid "Open admin dashboard"
+msgstr ""
+
+#: admin_panel/templates/admin/dashboard.html:303
+msgid ""
+"Use the analyzer dashboard to inspect stats and run quick checks without "
+"leaving admin."
+msgstr ""
+
+#: admin_panel/templates/admin/dictionaries.html:5
+msgid "Dictionaries · Admin"
+msgstr ""
+
+#: admin_panel/templates/admin/dictionaries.html:76
+msgid "Admin · Dictionaries"
+msgstr ""
+
+#: admin_panel/templates/admin/dictionaries.html:93
+msgid "Azerbaijani Dictionary"
+msgstr ""
+
+#: admin_panel/templates/admin/dictionaries.html:94
+msgid "Entries"
+msgstr ""
+
+#: admin_panel/templates/admin/dictionaries.html:98
+msgid "Review or remove existing lemmas and their features."
+msgstr ""
+
+#: admin_panel/templates/admin/dictionaries.html:131
+msgid "Add new entry"
+msgstr ""
+
+#: admin_panel/templates/admin/dictionaries.html:132
+msgid "All fields required except features"
+msgstr ""
+
+#: admin_panel/templates/admin/dictionaries.html:145
+msgid "Features (JSON)"
+msgstr ""
+
+#: admin_panel/templates/admin/dictionaries.html:149
+msgid "Add entry"
+msgstr ""
+
+#: admin_panel/templates/admin/rules.html:5
+msgid "Rules · Admin"
+msgstr ""
+
+#: admin_panel/templates/admin/rules.html:73
+msgid "Admin · Rules"
+msgstr ""
+
+#: admin_panel/templates/admin/rules.html:90
+msgid "Azerbaijani rule set"
+msgstr ""
+
+#: admin_panel/templates/admin/rules.html:95
+msgid "Keep tags consistent with affix inventory; include examples for clarity."
+msgstr ""
+
+#: admin_panel/templates/admin/rules.html:120
+msgid "Add new rule"
+msgstr ""
+
+#: admin_panel/templates/admin/rules.html:121
+msgid "Tag and description required"
+msgstr ""
+
+#: admin_panel/templates/admin/rules.html:130
+msgid "Rule description"
+msgstr ""
+
+#: admin_panel/templates/admin/rules.html:134
+msgid "kitablar"
+msgstr ""
+
+#: admin_panel/templates/admin/rules.html:137
+msgid "Add rule"
+msgstr ""
+

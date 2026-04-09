@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ _('Affixes · Admin') }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+    {% include '../../theme_toggle.html' %}
+    <header>
+        <div class="brand">
+            <div class="brand-badge">M</div>
+            <div>
+                <div class="muted" style="font-size:0.85rem;">{{ _('Morphology Suite') }}</div>
+                <div>{{ _('Admin · Affixes') }}</div>
+            </div>
+        </div>
+        <nav aria-label="Admin navigation">
+            <a class="pill" href="{{ url_for('index') }}">{{ _('Home') }}</a>
+            <a class="pill" href="/az-word-parser">{{ _('Word Parser') }}</a>
+            <a class="pill" href="/sentence-analyzer">{{ _('Sentence Analyzer') }}</a>
+            <a class="pill" href="{{ url_for('dashboard.dashboard') }}">{{ _('Dashboard') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.admin_dashboard') }}">{{ _('Admin') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_dictionaries') }}">{{ _('Dictionaries') }}</a>
+            <a class="pill is-active" href="{{ url_for('admin_panel.manage_affixes') }}">{{ _('Affixes') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_rules') }}">{{ _('Rules') }}</a>
+        </nav>
+        <div class="session">
+            <select class="lang-select" onchange="window.location.href='/set_language/'+this.value">
+                <option value="az" {% if get_locale()=='az' %}selected{% endif %}>AZ</option>
+                <option value="ru" {% if get_locale()=='ru' %}selected{% endif %}>RU</option>
+                <option value="tr" {% if get_locale()=='tr' %}selected{% endif %}>TR</option>
+                <option value="en" {% if get_locale()=='en' %}selected{% endif %}>EN</option>
+            </select>
+            {% if session.get('user') %}
+            <span class="muted">{{ session.get('user') }}</span>
+            <a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a>
+            {% else %}
+            <a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <main>
+        <section class="card">
+            <div class="section-header">
+                <div>
+                    <div class="muted">{{ _('Current inventory') }}</div>
+                    <h1 style="margin:0;">{{ _('Affixes') }}</h1>
+                </div>
+                <div class="badge">{{ affixes|length }} {{ _('total') }}</div>
+            </div>
+            <p class="muted" style="margin:0 0 0.6rem;">{{ _('Edit or delete individual affixes and their tags.') }}</p>
+            <div style="overflow-x:auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{ _('Affix') }}</th>
+                        <th>{{ _('Tag') }}</th>
+                        <th>{{ _('POS') }}</th>
+                        <th>{{ _('Action') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for affix in affixes %}
+                    <tr>
+                        <td>{{ affix.affix }}</td>
+                        <td>{{ affix.tag }}</td>
+                        <td><span class="muted">{{ affix.pos }}</span></td>
+                        <td>
+                            <form method="post" class="inline">
+                                <input type="hidden" name="affix" value="{{ affix.affix }}">
+                                <input type="hidden" name="action" value="delete">
+                                <button type="submit" class="btn danger">{{ _('Delete') }}</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </section>
+
+        <section class="card two-col" style="margin-top:1rem;">
+            <div class="stack">
+                <div class="section-header">
+                    <h2>{{ _('Add new affix') }}</h2>
+                    <span class="muted">{{ _('Fields required') }}</span>
+                </div>
+                <form method="post" class="stack">
+                    <input type="hidden" name="action" value="add">
+                    <div class="form-row">
+                        <label for="affix">{{ _('Affix') }}</label>
+                        <input id="affix" name="affix" placeholder="e.g., lar" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="tag">{{ _('Tag') }}</label>
+                        <input id="tag" name="tag" placeholder="e.g., PLURAL" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="pos">{{ _('POS (optional)') }}</label>
+                        <input id="pos" name="pos" placeholder="suffix / prefix">
+                    </div>
+                    <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
+                        <button type="submit" class="btn primary">{{ _('Add affix') }}</button>
+                        <a class="btn secondary" href="{{ url_for('admin_panel.admin_dashboard') }}">{{ _('Back to Admin') }}</a>
+                    </div>
+                </form>
+            </div>
+            <div class="stack" style="background:rgba(62,212,177,0.08);border:1px solid rgba(62,212,177,0.2);border-radius:12px;padding:1rem;">
+                <h3 style="margin:0 0 0.4rem;">{{ _('Hints') }}</h3>
+                <p class="muted" style="margin:0 0 0.35rem;">{{ _('Use short, unique tags (e.g., PL, POSS) that match your analyzer outputs.') }}</p>
+                <p class="muted" style="margin:0;">{{ _('POS can help future filtering; leave blank if not needed.') }}</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

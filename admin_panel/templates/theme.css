@@ -1,0 +1,35 @@
+/* Theme variables for light and dark mode */
+:root {
+  --background-color: #181a1b;
+  --text-color: #f8f9fa;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --accent-color: #17a2b8;
+}
+
+body.light-mode {
+  --background-color: #f8f9fa;
+  --text-color: #212529;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --accent-color: #17a2b8;
+}
+
+body {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+}
+
+a {
+  color: var(--accent-color);
+}

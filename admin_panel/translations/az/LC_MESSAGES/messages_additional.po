@@ -1,0 +1,89 @@
+msgid "Live corpus status"
+msgstr "Korpusun cari vəziyyəti"
+
+msgid "Totals"
+msgstr "Cəmi"
+
+msgid "Rules for Selected Dictionary"
+msgstr "Seçilmiş lüğət üçün qaydalar"
+
+msgid "Tag"
+msgstr "Etiket"
+
+msgid "Description"
+msgstr "Təsvir"
+
+msgid "Example"
+msgstr "Nümunə"
+
+msgid "No rules found for this dictionary."
+msgstr "Bu lüğət üçün qayda tapılmadı."
+
+msgid "Azerbaijani Word Analyzer"
+msgstr "Azərbaycan dili söz analizatoru"
+
+msgid "Word"
+msgstr "Söz"
+
+msgid "Enter an Azerbaijani word"
+msgstr "Azərbaycan dilində söz daxil edin"
+
+msgid "Analyze"
+msgstr "Analiz et"
+
+msgid "Sentence Morphological Analyzer"
+msgstr "Cümlə morfoloji analizatoru"
+
+msgid "Token-by-token"
+msgstr "Token üzrə"
+
+msgid "Analyze full sentences for POS and morphological features."
+msgstr "Cümlələri tam şəkildə POS və morfoloji xüsusiyyətlərə görə analiz edin."
+
+msgid "Go to Sentence Analyzer"
+msgstr "Cümlə analizatoruna keç"
+
+msgid "Dictionary Management"
+msgstr "Lüğətin idarə edilməsi"
+
+msgid "Edit entries as JSON and save."
+msgstr "Daxilolmaları JSON kimi redaktə edin və yadda saxlayın."
+
+msgid "Azerbaijani Morphological Analyzer"
+msgstr "Azərbaycan dili morfoloji analizatoru"
+
+msgid "Dictionaries"
+msgstr "Lüğətlər"
+
+msgid "Logout"
+msgstr "Çıxış"
+
+msgid "Login"
+msgstr "Daxil ol"
+
+msgid "Multilingual morphological toolkit"
+msgstr "Çoxdilli morfoloji alətlər dəsti"
+
+msgid "Analyze, curate, and monitor your corpus in one place."
+msgstr "Korpusunuzu bir yerdə analiz edin, idarə edin və izləyin."
+
+msgid "Switch languages, parse words and sentences, and manage dictionaries with the same streamlined interface."
+msgstr "Dilləri dəyişin, söz və cümlələri analiz edin, lüğətləri eyni interfeys ilə idarə edin."
+
+msgid "Quick links"
+msgstr "Sürətli keçidlər"
+
+msgid "Jump into the most used tools"
+msgstr "Ən çox istifadə olunan alətlərə keçid"
+
+msgid "Word Analyzer"
+msgstr "Söz analizatoru"
+
+msgid "Parse words into root, affixes and tags."
+msgstr "Sözləri kök, suffiks və etiketlərə ayırın."
+
+msgid "Go to Word Analyzer"
+msgstr "Söz analizatoruna keç"
+
+msgid "Token-level POS and features for full sentences."
+msgstr "Tam cümlələr üçün token səviyyəsində POS və xüsusiyyətlər."

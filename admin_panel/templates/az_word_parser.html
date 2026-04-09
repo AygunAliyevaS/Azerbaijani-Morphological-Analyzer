@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ _('Azerbaijani Word Parser') }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+    {% include 'theme_toggle.html' %}
+    <header>
+        <div class="brand">
+            <div class="brand-badge">M</div>
+            <div>
+                <div class="muted" style="font-size:0.85rem;">{{ _('Morphology Suite') }}</div>
+                <div>{{ _('Word Parser') }}</div>
+            </div>
+        </div>
+        <nav>
+            <a class="pill" href="{{ url_for('index') }}">{{ _('Home') }}</a>
+            <a class="pill is-active" href="/az-word-parser">{{ _('Word Parser') }}</a>
+            <a class="pill" href="/sentence-analyzer">{{ _('Sentence Analyzer') }}</a>
+            <a class="pill" href="{{ url_for('dashboard.dashboard') }}">{{ _('Dashboard') }}</a>
+            {% if session.get('user') %}
+            <a class="pill" href="{{ url_for('admin_panel.admin_dashboard') }}">{{ _('Admin') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_dictionaries') }}">{{ _('Dictionaries') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_affixes') }}">{{ _('Affixes') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_rules') }}">{{ _('Rules') }}</a>
+            {% endif %}
+        </nav>
+        <div class="session">
+            <select class="lang-select" onchange="window.location.href='/set_language/'+this.value">
+                <option value="az" {% if get_locale()=='az' %}selected{% endif %}>AZ</option>
+                <option value="ru" {% if get_locale()=='ru' %}selected{% endif %}>RU</option>
+                <option value="tr" {% if get_locale()=='tr' %}selected{% endif %}>TR</option>
+                <option value="en" {% if get_locale()=='en' %}selected{% endif %}>EN</option>
+            </select>
+            {% if session.get('user') %}
+            <span class="muted">{{ session.get('user') }}</span>
+            <a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a>
+            {% else %}
+            <a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a>
+            {% endif %}
+        </div>
+    </header>
+    <main>
+        <div class="card">
+            <div class="section-header">
+                <div>
+                    <div class="muted">{{ _('Root + affix tags') }}</div>
+                    <h2 style="margin:0;">{{ _('Azerbaijani Word Morpheme Parser') }}</h2>
+                </div>
+            </div>
+            <form method="post" style="display:flex;gap:0.7rem;flex-wrap:wrap;align-items:flex-end;margin-top:0.8rem;">
+                <div style="flex:1;min-width:240px;">
+                    <label for="word">{{ _('Enter Azerbaijani word') }}</label>
+                    <input type="text" name="word" id="word" value="{{ word }}" required placeholder="{{ _('Type a word...') }}">
+                </div>
+                <button type="submit" style="flex-shrink:0;">{{ _('Parse') }}</button>
+            </form>
+            {% if result %}
+                <div class="result-box" style="margin-top:1rem;">
+                    <h4 style="margin:0 0 0.6rem;">{{ _('Result') }}</h4>
+                    {% if result.error %}
+                        <p style="color:#ff9b9b;margin:0;">{{ result.error }}</p>
+                    {% else %}
+                        <p style="margin:0 0 0.3rem;"><strong>{{ _('Root:') }}</strong> {{ result.root }}</p>
+                        <p style="margin:0 0 0.3rem;"><strong>{{ _('Affixes:') }}</strong> {{ result.affixes|join(', ') if result.affixes else _('None') }}</p>
+                        <p style="margin:0;"><strong>{{ _('Tags:') }}</strong> {{ result.tags|join(', ') if result.tags else _('None') }}</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>

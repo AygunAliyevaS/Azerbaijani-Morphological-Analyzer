@@ -1,0 +1,22 @@
+{
+    "yaz": {
+        "pos": "VERB",
+        "gloss": "write"
+    },
+    "oxu": {
+        "pos": "VERB",
+        "gloss": "read"
+    },
+    "gör": {
+        "pos": "VERB",
+        "gloss": "see"
+    },
+    "get": {
+        "pos": "VERB",
+        "gloss": "go"
+    },
+    "al": {
+        "pos": "VERB",
+        "gloss": "take"
+    }
+}

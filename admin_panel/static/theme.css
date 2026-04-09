@@ -1,0 +1,54 @@
+/* Theme variables for light and dark mode */
+:root {
+  --background-color: #181a1b;
+  --text-color: #f8f9fa;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --accent-color: #17a2b8;
+  --card-color: #112b43;
+  --muted-color: #9fb3c8;
+  --border-color: #1d3b58;
+  --shadow: 0 14px 40px rgba(0, 0, 0, 0.25);
+}
+
+body.light-mode {
+  --background-color: #f8f9fa;
+  --text-color: #212529;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --accent-color: #17a2b8;
+  --card-color: #fff;
+  --muted-color: #6c757d;
+  --border-color: #dee2e6;
+  --shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+
+body {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+}
+
+.card {
+  background: var(--card-color) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+}
+
+a {
+  color: var(--accent-color);
+}
+
+.muted {
+  color: var(--muted-color) !important;
+}

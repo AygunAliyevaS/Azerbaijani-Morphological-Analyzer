@@ -1,0 +1,6 @@
+flask==2.2.5
+flask-admin
+flask-babel==2.0.0
+scikit-learn==1.4.2
+# Flask 2.2.x requires werkzeug.__version__; keep Werkzeug below 3 to avoid missing attribute
+werkzeug<3
