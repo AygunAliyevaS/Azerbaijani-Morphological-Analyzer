@@ -6,6 +6,13 @@ from models import DashboardStatsCollector, RuleManager, normalize_language
 
 bp = Blueprint('dashboard', __name__)
 
+
+@bp.before_request
+def require_login():
+    if 'user' not in session:
+        return redirect(url_for('auth.login'))
+
+
 def parse_az_word(word, roots, affixes):
     for root in roots:
         if word.startswith(root):

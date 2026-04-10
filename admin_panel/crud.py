@@ -3,6 +3,7 @@ from models import DictionaryManager, AffixManager, RuleManager
 
 bp = Blueprint('crud', __name__)
 
+
 @bp.route('/dictionaries/<lang>', methods=['GET', 'POST'])
 def manage_dictionary(lang):
     manager = DictionaryManager(lang)

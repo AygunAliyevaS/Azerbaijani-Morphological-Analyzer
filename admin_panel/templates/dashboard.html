@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
 </head>
 <body>
-    {% include 'theme_toggle.html' %}
     <header>
         <div class="brand">
             <div class="brand-badge">M</div>
@@ -18,7 +17,7 @@
             </div>
         </div>
         <nav>
-            <a class="pill" href="{{ url_for('index') }}">{{ _('Home') }}</a>
+            <a class="pill" href="{{ url_for('index') }}">{{ nav_home_label() }}</a>
             <a class="pill" href="/az-word-parser">{{ _('Söz analizatoru') }}</a>
             <a class="pill" href="/sentence-analyzer">{{ _('Cümlə analizatoru') }}</a>
             <a class="pill is-active" href="{{ url_for('dashboard.dashboard') }}">{{ _('Dashboard') }}</a>
@@ -28,12 +27,13 @@
             <a class="pill" href="{{ url_for('admin_panel.manage_rules', lang=selected_dictionary) }}">{{ _('Qaydalar') }}</a>
         </nav>
         <div class="session">
-            <select class="lang-select" onchange="window.location.href='/set_language/'+this.value">
+            <select class="lang-select" onchange="window.location.assign('{{ url_for('set_language', lang_code='__lang__') }}'.replace('__lang__', encodeURIComponent(this.value)))">
                 <option value="az" {% if get_locale()=='az' %}selected{% endif %}>AZ</option>
                 <option value="ru" {% if get_locale()=='ru' %}selected{% endif %}>RU</option>
                 <option value="tr" {% if get_locale()=='tr' %}selected{% endif %}>TR</option>
                 <option value="en" {% if get_locale()=='en' %}selected{% endif %}>EN</option>
             </select>
+            {% include 'theme_toggle.html' %}
             {% if session.get('user') %}
             <span class="muted">{{ session.get('user') }}</span>
             <a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a>

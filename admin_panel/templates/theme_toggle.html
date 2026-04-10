@@ -1,19 +1,36 @@
-<!-- Theme toggle script and button. Place in base template or each page. -->
+<!-- Shared theme toggle control. -->
 <script>
+function updateThemeToggle(mode) {
+  const button = document.querySelector('.theme-toggle');
+  const icon = document.getElementById('theme-toggle-icon');
+  if (!button || !icon) {
+    return;
+  }
+
+  const isLight = mode === 'light';
+  icon.textContent = isLight ? '☀' : '☾';
+  button.dataset.theme = mode;
+  button.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+  button.setAttribute('title', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+}
+
 function setTheme(mode) {
   document.body.classList.remove('light-mode', 'dark-mode');
   document.body.classList.add(mode + '-mode');
   localStorage.setItem('theme', mode);
+  updateThemeToggle(mode);
 }
+
 function toggleTheme() {
   const current = document.body.classList.contains('light-mode') ? 'light' : 'dark';
   setTheme(current === 'light' ? 'dark' : 'light');
 }
+
 window.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('theme');
   setTheme(saved === 'light' ? 'light' : 'dark');
 });
 </script>
-<button onclick="toggleTheme()" style="position:fixed;top:1rem;right:1rem;z-index:1000;padding:0.5rem 1rem;border-radius:8px;border:1px solid #1f3b57;background:#112b43;color:#eaf5ff;box-shadow:0 6px 18px rgba(0,0,0,0.18);cursor:pointer;">
-  Toggle theme
+<button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="{{ _('Toggle theme') }}" title="{{ _('Toggle theme') }}">
+  <span id="theme-toggle-icon" class="theme-toggle__icon" aria-hidden="true">☾</span>
 </button>

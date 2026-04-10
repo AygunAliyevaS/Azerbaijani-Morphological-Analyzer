@@ -7,6 +7,13 @@
   --text: #eaf5ff;
   --muted: #9fb3c8;
   --shadow: 0 14px 40px rgba(0, 0, 0, 0.25);
+  --header-bg: rgba(15, 32, 51, 0.97);
+  --input-bg: #0c1d2f;
+}
+
+body.light-mode {
+  --header-bg: rgba(255, 255, 255, 0.97);
+  --input-bg: #f0f4f8;
 }
 
 * {
@@ -29,17 +36,18 @@ body {
 }
 
 header {
-  padding: 1.1rem 2.2rem;
+  padding: 0.85rem 2.2rem;
   border-bottom: 1px solid var(--border);
-  background: rgba(15, 32, 51, 0.95);
+  background: var(--header-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   position: sticky;
   top: 0;
   z-index: 10;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 0.6rem;
-  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .brand {
@@ -61,16 +69,21 @@ header {
 
 nav {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .pill {
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.85rem;
   border: 1px solid transparent;
   border-radius: 999px;
   color: var(--muted);
   text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  white-space: nowrap;
   transition: all 0.15s ease;
 }
 
@@ -84,16 +97,56 @@ nav {
 .session {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
+  white-space: nowrap;
 }
 
 .session a {
   font-weight: 600;
   color: var(--text);
-  padding: 0.45rem 0.8rem;
+  padding: 0.4rem 0.75rem;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
+  background: transparent;
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.session a:hover {
+  border-color: var(--accent);
+  background: rgba(62, 212, 177, 0.08);
+  color: var(--text);
+}
+
+.theme-toggle {
+  width: 2.35rem;
+  height: 2.35rem;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+  flex: 0 0 auto;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  background: rgba(62, 212, 177, 0.12);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.theme-toggle__icon {
+  font-size: 1.05rem;
+  line-height: 1;
 }
 
 main {
@@ -244,7 +297,7 @@ select {
   padding: 0.65rem 0.75rem;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: #0c1d2f;
+  background: var(--input-bg);
   color: var(--text);
 }
 
@@ -302,16 +355,21 @@ tr:hover td {
 }
 
 .result-box {
-  background: #0c1d2f;
+  background: var(--input-bg);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 0.85rem 1rem;
 }
 
-@media (max-width: 840px) {
+@media (max-width: 900px) {
   header {
-    flex-direction: column;
-    align-items: flex-start;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+  }
+
+  header nav {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
   }
 
   .hero {
@@ -328,7 +386,7 @@ tr:hover td {
   padding: 0.38rem 0.6rem;
   border-radius: 8px;
   font-size: 0.83rem;
-  background: #0c1d2f;
+  background: var(--input-bg);
   border: 1px solid var(--border);
   color: var(--text);
   cursor: pointer;
@@ -352,7 +410,7 @@ tr:hover td {
 .json-editor {
   width: 100%;
   min-height: 360px;
-  background: #0b1f33;
+  background: var(--input-bg);
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: 12px;
