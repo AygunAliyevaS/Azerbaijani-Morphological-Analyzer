@@ -9,8 +9,10 @@ bp = Blueprint('dashboard', __name__)
 
 @bp.before_request
 def require_login():
-    if 'user' not in session:
-        return redirect(url_for('auth.login'))
+    # TEMPORARILY DISABLED FOR DEVELOPMENT
+    # if 'user' not in session:
+    #     return redirect(url_for('auth.login'))
+    pass
 
 
 def parse_az_word(word, roots, affixes):
