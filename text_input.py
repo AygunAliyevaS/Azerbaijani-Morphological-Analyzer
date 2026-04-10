@@ -16,11 +16,11 @@ def tokenize(text: str):
 
 def normalize(token: str):
     """
-    Простейшая нормализация:
-    - приводит к нижнему регистру
-    - может быть расширена (удаление диакритики и др.)
+    Unicode-safe normalization for Azerbaijani and related languages:
+    - trims surrounding whitespace
+    - applies casefold for more robust case-insensitive matching
     """
-    return token.lower()
+    return token.strip().casefold()
 
 def prepare_input(text: str):
     """

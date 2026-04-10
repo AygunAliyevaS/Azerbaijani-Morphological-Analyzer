@@ -19,7 +19,7 @@
         </div>
         <nav>
             <a class="pill" href="{{ url_for('index') }}">{{ _('Home') }}</a>
-            <a class="pill" href="/az-word-parser">{{ _('Word Parser') }}</a>
+            <a class="pill" href="/az-word-parser">{{ _('Söz analizatoru') }}</a>
             <a class="pill is-active" href="/sentence-analyzer">{{ _('Sentence Analyzer') }}</a>
             <a class="pill" href="{{ url_for('dashboard.dashboard') }}">{{ _('Dashboard') }}</a>
             {% if session.get('user') %}
@@ -52,14 +52,24 @@
                     <h2 style="margin:0;">{{ _('Sentence Morphological Analyzer') }}</h2>
                 </div>
             </div>
-            <form method="post" style="margin-top:0.9rem;">
-                <div class="form-row">
-                    <label for="sentence">{{ _('Sentence') }}</label>
-                    <textarea id="sentence" name="sentence" rows="3"
-                        style="width:100%;background:#0b1f33;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:0.8rem;font-family:inherit;"
-                        placeholder="{{ _('Enter an Azerbaijani sentence...') }}"></textarea>
+            <form method="post" style="margin-top:0.9rem; display:grid; gap:1rem;">
+                <div style="display:grid; grid-template-columns:2fr 1fr; gap:1rem; align-items:start;">
+                    <div class="form-row" style="margin:0;">
+                        <label for="sentence">{{ _('Sentence') }}</label>
+                        <textarea id="sentence" name="sentence" rows="3"
+                            style="width:100%;background:#0b1f33;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:0.8rem;font-family:inherit;"
+                            placeholder="{{ _('Enter an Azerbaijani sentence...') }}">{{ sentence or '' }}</textarea>
+                    </div>
+                    <div class="form-row" style="margin:0;">
+                        <label for="lang">{{ _('Language') }}</label>
+                        <select id="lang" name="lang" class="lang-select" style="width:100%;">
+                            <option value="az" {% if selected_lang=='az' %}selected{% endif %}>az</option>
+                            <option value="tr" {% if selected_lang=='tr' %}selected{% endif %}>tr</option>
+                            <option value="ru" {% if selected_lang=='ru' %}selected{% endif %}>ru</option>
+                            <option value="en" {% if selected_lang=='en' %}selected{% endif %}>en</option>
+                        </select>
+                    </div>
                 </div>
-                <input type="hidden" name="lang" value="az">
                 <button type="submit">{{ _('Analyze') }}</button>
             </form>
             {% if result %}
@@ -83,6 +93,15 @@
                         {% endfor %}
                     </tbody>
                 </table>
+            </div>
+            <div style="margin-top:1rem; display:flex; flex-wrap:wrap; gap:0.45rem; align-items:center;">
+                <span class="muted">{{ _('POS labels') }}</span>
+                {% for row in result.table %}
+                <span style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.28rem 0.55rem;border-radius:999px;border:1px solid var(--border);background:{% if row[1]=='UNK' %}rgba(255,115,115,0.12){% else %}rgba(101,117,255,0.12){% endif %};">
+                    <span>{{ row[0] }}</span>
+                    <strong>{{ row[1] }}</strong>
+                </span>
+                {% endfor %}
             </div>
             {% endif %}
         </div>

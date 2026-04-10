@@ -2,13 +2,13 @@
 <html lang="{{ get_locale() }}">
 <head>
     <meta charset="UTF-8">
-    <title>{{ _('Dictionaries · Admin') }}</title>
+    <title>{{ _('Dictionaries · Admin') }} · {{ selected_language|upper }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
 </head>
 <body>
-    {% include '../../theme_toggle.html' %}
+    {% include 'theme_toggle.html' %}
     <header>
         <div class="brand">
             <div class="brand-badge">M</div>
@@ -19,13 +19,13 @@
         </div>
         <nav aria-label="Admin navigation">
             <a class="pill" href="{{ url_for('index') }}">{{ _('Home') }}</a>
-            <a class="pill" href="/az-word-parser">{{ _('Word Parser') }}</a>
+            <a class="pill" href="/az-word-parser">{{ _('Söz analizatoru') }}</a>
             <a class="pill" href="/sentence-analyzer">{{ _('Sentence Analyzer') }}</a>
             <a class="pill" href="{{ url_for('dashboard.dashboard') }}">{{ _('Dashboard') }}</a>
-            <a class="pill" href="{{ url_for('admin_panel.admin_dashboard') }}">{{ _('Admin') }}</a>
-            <a class="pill is-active" href="{{ url_for('admin_panel.manage_dictionaries') }}">{{ _('Dictionaries') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.admin_dashboard', lang=selected_language) }}">{{ _('Admin') }}</a>
+            <a class="pill is-active" href="{{ url_for('admin_panel.manage_dictionaries', lang=selected_language) }}">{{ _('Dictionaries') }}</a>
             <a class="pill" href="{{ url_for('admin_panel.manage_affixes') }}">{{ _('Affixes') }}</a>
-            <a class="pill" href="{{ url_for('admin_panel.manage_rules') }}">{{ _('Rules') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_rules', lang=selected_language) }}">{{ _('Rules') }}</a>
         </nav>
         <div class="session">
             <select class="lang-select" onchange="window.location.href='/set_language/'+this.value">
@@ -47,12 +47,38 @@
         <section class="card">
             <div class="section-header">
                 <div>
-                    <div class="muted">{{ _('Azerbaijani Dictionary') }}</div>
+                    <div class="muted">{{ _('Language scope') }}</div>
+                    <h1 style="margin:0;">{{ _('Dictionaries') }}</h1>
+                </div>
+                <div class="badge">{{ selected_language|upper }}</div>
+            </div>
+            <p class="muted" style="margin:0 0 0.8rem;">{{ _('Switch between AZ, TR, and RU dictionaries without leaving the admin panel.') }}</p>
+            <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
+                {% for card in stats.language_cards %}
+                <a class="pill {% if card.is_selected %}is-active{% endif %}" href="{{ url_for('admin_panel.manage_dictionaries', lang=card.code) }}">{{ card.code|upper }} · {{ card.dictionary_count }}</a>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="grid stats" style="margin-top:1rem;">
+            {% for card in stats.language_cards %}
+            <div class="card" {% if card.is_selected %}style="border-color:var(--accent);"{% endif %}>
+                <div class="muted">{{ _(card.label) }}</div>
+                <div class="metric">{{ card.dictionary_count }}<small>{{ _('words') }}</small></div>
+            </div>
+            {% endfor %}
+        </section>
+
+        <section class="card">
+            <div class="section-header">
+                <div>
+                    <div class="muted">{{ selected_language_label }}</div>
                     <h1 style="margin:0;">{{ _('Entries') }}</h1>
                 </div>
                 <div class="badge">{{ entries|length }} {{ _('total') }}</div>
             </div>
             <p class="muted" style="margin:0 0 0.6rem;">{{ _('Review or remove existing lemmas and their features.') }}</p>
+            {% if entries %}
             <div style="overflow-x:auto;">
             <table>
                 <thead>
@@ -70,7 +96,7 @@
                         <td>{{ entry.POS }}</td>
                         <td><span class="muted">{{ entry.Features }}</span></td>
                         <td>
-                            <form method="post" class="inline">
+                            <form method="post" action="{{ url_for('admin_panel.manage_dictionaries', lang=selected_language) }}" class="inline">
                                 <input type="hidden" name="word" value="{{ entry.word }}">
                                 <input type="hidden" name="action" value="delete">
                                 <button type="submit" class="btn danger">{{ _('Delete') }}</button>
@@ -81,14 +107,17 @@
                 </tbody>
             </table>
             </div>
+            {% else %}
+            <p class="muted">{{ _('No entries found for this dictionary yet.') }}</p>
+            {% endif %}
         </section>
 
         <section class="card" style="margin-top:1rem;">
             <div class="section-header">
                 <h2>{{ _('Add new entry') }}</h2>
-                <span class="muted">{{ _('All fields required except features') }}</span>
+                <span class="muted">{{ selected_language|upper }} · {{ _('All fields required except features') }}</span>
             </div>
-            <form method="post" class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.8rem;margin-top:0.5rem;">
+            <form method="post" action="{{ url_for('admin_panel.manage_dictionaries', lang=selected_language) }}" class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.8rem;margin-top:0.5rem;">
                 <input type="hidden" name="action" value="add">
                 <div class="form-row">
                     <label for="word">{{ _('Word') }}</label>
@@ -104,7 +133,7 @@
                 </div>
                 <div style="display:flex;align-items:flex-end;gap:0.6rem;flex-wrap:wrap;">
                     <button type="submit" class="btn primary">{{ _('Add entry') }}</button>
-                    <a class="btn secondary" href="{{ url_for('admin_panel.admin_dashboard') }}">{{ _('Back to Admin') }}</a>
+                    <a class="btn secondary" href="{{ url_for('admin_panel.admin_dashboard', lang=selected_language) }}">{{ _('Back to Admin') }}</a>
                 </div>
             </form>
         </section>

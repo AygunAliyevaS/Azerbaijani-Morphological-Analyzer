@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
 </head>
 <body>
-    {% include '../../theme_toggle.html' %}
+    {% include 'theme_toggle.html' %}
     <header>
         <div class="brand">
             <div class="brand-badge">M</div>
@@ -19,13 +19,13 @@
         </div>
         <nav aria-label="Primary navigation">
             <a class="pill" href="{{ url_for('index') }}">{{ _('Home') }}</a>
-            <a class="pill" href="/az-word-parser">{{ _('Word Parser') }}</a>
+            <a class="pill" href="/az-word-parser">{{ _('Söz analizatoru') }}</a>
             <a class="pill" href="/sentence-analyzer">{{ _('Sentence Analyzer') }}</a>
             <a class="pill" href="{{ url_for('dashboard.dashboard') }}">{{ _('Dashboard') }}</a>
-            <a class="pill is-active" href="{{ url_for('admin_panel.admin_dashboard') }}">{{ _('Admin') }}</a>
-            <a class="pill" href="{{ url_for('admin_panel.manage_dictionaries') }}">{{ _('Dictionaries') }}</a>
+            <a class="pill is-active" href="{{ url_for('admin_panel.admin_dashboard', lang=selected_language) }}">{{ _('Admin') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_dictionaries', lang=selected_language) }}">{{ _('Dictionaries') }}</a>
             <a class="pill" href="{{ url_for('admin_panel.manage_affixes') }}">{{ _('Affixes') }}</a>
-            <a class="pill" href="{{ url_for('admin_panel.manage_rules') }}">{{ _('Rules') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_rules', lang=selected_language) }}">{{ _('Rules') }}</a>
         </nav>
         <div class="session">
             <select class="lang-select" onchange="window.location.href='/set_language/'+this.value">
@@ -48,14 +48,18 @@
             <div>
                 <div class="chip">{{ _('Administration overview') }}</div>
                 <h1>{{ _('Control center for dictionaries, affixes and rules') }}</h1>
-                <p>{{ _('Jump directly into data curation, keep an eye on corpus size, and maintain linguistic rules from one place.') }}</p>
+                <p>{{ _('Jump directly into data curation, compare language inventories, and manage linguistic rules from one place.') }}</p>
             </div>
             <div class="card" style="background:linear-gradient(160deg,rgba(62,212,177,0.2),rgba(18,42,66,0.95));">
                 <div class="section-header">
                     <h2>{{ _('Totals') }}</h2>
-                    <span class="muted">{{ _('Live on page load') }}</span>
+                    <span class="muted">{{ _('Focused on') }} {{ stats.selected_language_label }}</span>
                 </div>
                 <div class="grid stats">
+                    <div>
+                        <div class="muted">{{ _('Dictionary entries') }}</div>
+                        <div class="metric">{{ stats.dictionary_total }}</div>
+                    </div>
                     <div>
                         <div class="muted">{{ _('Affixes') }}</div>
                         <div class="metric">{{ stats.affixes }}</div>
@@ -68,66 +72,136 @@
             </div>
         </section>
 
-        <section class="grid stats" style="margin-top:1.2rem;">
-            <div class="card">
-                <div class="muted">{{ _('Azerbaijani entries') }}</div>
-                <div class="metric">{{ stats.dictionaries.az }}<small>{{ _('words') }}</small></div>
-            </div>
-            <div class="card">
-                <div class="muted">{{ _('Turkish entries') }}</div>
-                <div class="metric">{{ stats.dictionaries.tr }}<small>{{ _('words') }}</small></div>
-            </div>
-            <div class="card">
-                <div class="muted">{{ _('Russian entries') }}</div>
-                <div class="metric">{{ stats.dictionaries.ru }}<small>{{ _('words') }}</small></div>
-            </div>
-        </section>
-
         <section style="margin-top:1.4rem;">
             <div class="section-header">
-                <h2>{{ _('Quick actions') }}</h2>
-                <span class="muted">{{ _('Go straight to edit screens') }}</span>
+                <h2>{{ _('Language workspaces') }}</h2>
+                <span class="muted">{{ _('Select a language, then jump into its data') }}</span>
             </div>
             <div class="actions">
-                <div class="action-card">
+                {% for card in stats.language_cards %}
+                <div class="action-card" {% if card.is_selected %}style="border-color:var(--accent);background:linear-gradient(150deg, rgba(18, 42, 66, 0.9), rgba(62, 212, 177, 0.18));"{% endif %}>
                     <div class="section-header" style="margin-bottom:0.3rem;">
-                        <h3>{{ _('Manage dictionaries') }}</h3>
-                        <span class="muted">{{ _('AZ / TR / RU') }}</span>
+                        <h3>{{ _(card.label) }}</h3>
+                        <span class="badge">{{ card.code|upper }}</span>
                     </div>
-                    <p class="muted">{{ _('Update lemmas, parts of speech and feature sets for each language.') }}</p>
-                    <footer>
-                        <a class="btn" href="{{ url_for('admin_panel.manage_dictionaries') }}">{{ _('Open dictionaries') }}</a>
+                    <p class="muted">{{ card.dictionary_count }} {{ _('dictionary entries') }} · {{ card.rule_count }} {{ _('rules') }}</p>
+                    <footer style="display:flex;gap:0.6rem;flex-wrap:wrap;">
+                        <a class="btn secondary" href="{{ url_for('admin_panel.admin_dashboard', lang=card.code) }}">{{ _('Preview') }}</a>
+                        <a class="btn" href="{{ url_for('admin_panel.manage_dictionaries', lang=card.code) }}">{{ _('Dictionaries') }}</a>
+                        <a class="btn secondary" href="{{ url_for('admin_panel.manage_rules', lang=card.code) }}">{{ _('Rules') }}</a>
                     </footer>
                 </div>
-                <div class="action-card">
-                    <div class="section-header" style="margin-bottom:0.3rem;">
-                        <h3>{{ _('Affixes inventory') }}</h3>
-                        <span class="muted">{{ _('Tags &amp; POS') }}</span>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="two-col" style="margin-top:1.4rem;">
+            <div class="card">
+                <div class="section-header">
+                    <div>
+                        <div class="muted">{{ stats.selected_language_label }}</div>
+                        <h2>{{ _('Dictionary preview') }}</h2>
                     </div>
-                    <p class="muted">{{ _('Edit or append derivational and inflectional affixes used by the analyzer.') }}</p>
-                    <footer>
-                        <a class="btn" href="{{ url_for('admin_panel.manage_affixes') }}">{{ _('Open affixes') }}</a>
-                    </footer>
+                    <a class="btn secondary" href="{{ url_for('admin_panel.manage_dictionaries', lang=selected_language) }}">{{ _('Open dictionary') }}</a>
                 </div>
-                <div class="action-card">
-                    <div class="section-header" style="margin-bottom:0.3rem;">
-                        <h3>{{ _('Rule sets') }}</h3>
-                        <span class="muted">{{ _('Morphological rules') }}</span>
+                {% if stats.selected_dictionary_preview %}
+                <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{{ _('Word') }}</th>
+                            <th>{{ _('POS') }}</th>
+                            <th>{{ _('Features') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in stats.selected_dictionary_preview %}
+                        <tr>
+                            <td>{{ entry.word }}</td>
+                            <td>{{ entry.POS }}</td>
+                            <td><span class="muted">{{ entry.Features }}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+                {% else %}
+                <p class="muted">{{ _('No entries yet for the selected language.') }}</p>
+                {% endif %}
+            </div>
+
+            <div class="card">
+                <div class="section-header">
+                    <div>
+                        <div class="muted">{{ stats.selected_language_label }}</div>
+                        <h2>{{ _('Rules preview') }}</h2>
                     </div>
-                    <p class="muted">{{ _('Maintain tagging rules and examples for the selected languages.') }}</p>
-                    <footer>
-                        <a class="btn" href="{{ url_for('admin_panel.manage_rules') }}">{{ _('Open rules') }}</a>
-                    </footer>
+                    <a class="btn secondary" href="{{ url_for('admin_panel.manage_rules', lang=selected_language) }}">{{ _('Open rules') }}</a>
                 </div>
+                {% if stats.selected_rules_preview %}
+                <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{{ _('Tag') }}</th>
+                            <th>{{ _('Description') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rule in stats.selected_rules_preview %}
+                        <tr>
+                            <td>{{ rule.tag }}</td>
+                            <td><span class="muted">{{ rule.desc }}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+                {% else %}
+                <p class="muted">{{ _('No rules yet for the selected language.') }}</p>
+                {% endif %}
             </div>
         </section>
 
         <section style="margin-top:1.4rem;">
             <div class="section-header">
-                <h2>{{ _('Need the dashboard tools?') }}</h2>
+                <h2>{{ _('Affix inventory') }}</h2>
+                <a class="btn secondary" href="{{ url_for('admin_panel.manage_affixes') }}">{{ _('Open affixes') }}</a>
+            </div>
+            <div class="card">
+                {% if stats.affix_preview %}
+                <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{{ _('Affix') }}</th>
+                            <th>{{ _('Tag') }}</th>
+                            <th>{{ _('POS') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for affix in stats.affix_preview %}
+                        <tr>
+                            <td>{{ affix.affix }}</td>
+                            <td>{{ affix.tag }}</td>
+                            <td><span class="muted">{{ affix.pos or _('Unspecified') }}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+                {% else %}
+                <p class="muted">{{ _('No affixes available yet.') }}</p>
+                {% endif %}
+            </div>
+        </section>
+
+        <section style="margin-top:1.4rem;">
+            <div class="section-header">
+                <h2>{{ _('Need the analyzer dashboard tools?') }}</h2>
                 <a class="btn secondary" href="{{ url_for('dashboard.dashboard') }}">{{ _('Open analyzer dashboard') }}</a>
             </div>
-            <p class="muted">{{ _('Use the analyzer dashboard to inspect stats and run quick checks without leaving admin.') }}</p>
+            <p class="muted">{{ _('Use the analyzer dashboard to run parsing and sentence checks after updating admin data.') }}</p>
         </section>
     </main>
 </body>

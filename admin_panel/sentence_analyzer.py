@@ -22,8 +22,14 @@ def analyze_sentence(sentence, lang_code):
 @bp.route('/sentence-analyzer', methods=['GET', 'POST'])
 def sentence_analyzer():
     result = None
+    sentence = ''
+    selected_lang = request.form.get('lang', 'az') if request.method == 'POST' else 'az'
     if request.method == 'POST':
         sentence = request.form.get('sentence', '')
-        # Force Azerbaijani analysis to keep the analyzer single-language
-        result = analyze_sentence(sentence, 'az')
-    return render_template('sentence_analyzer.html', result=result)
+        result = analyze_sentence(sentence, selected_lang)
+    return render_template(
+        'sentence_analyzer.html',
+        result=result,
+        selected_lang=selected_lang,
+        sentence=sentence,
+    )

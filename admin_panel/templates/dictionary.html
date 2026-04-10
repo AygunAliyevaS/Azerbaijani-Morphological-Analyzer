@@ -19,13 +19,13 @@
         </div>
         <nav>
             <a class="pill" href="{{ url_for('index') }}">{{ _('Home') }}</a>
-            <a class="pill" href="/az-word-parser">{{ _('Word Parser') }}</a>
-            <a class="pill" href="/sentence-analyzer">{{ _('Sentence Analyzer') }}</a>
+            <a class="pill" href="/az-word-parser">{{ _('Söz analizatoru') }}</a>
+            <a class="pill" href="/sentence-analyzer">{{ _('Cümlə analizatoru') }}</a>
             <a class="pill" href="{{ url_for('dashboard.dashboard') }}">{{ _('Dashboard') }}</a>
             <a class="pill" href="{{ url_for('admin_panel.admin_dashboard') }}">{{ _('Admin') }}</a>
             <a class="pill is-active" href="{{ url_for('admin_panel.manage_dictionaries') }}">{{ _('Dictionaries') }}</a>
             <a class="pill" href="{{ url_for('admin_panel.manage_affixes') }}">{{ _('Affixes') }}</a>
-            <a class="pill" href="{{ url_for('admin_panel.manage_rules') }}">{{ _('Rules') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_rules') }}">{{ _('Qaydalar') }}</a>
         </nav>
         <div class="session">
             <select class="lang-select" onchange="window.location.href='/set_language/'+this.value">

@@ -18,13 +18,12 @@ app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['BABEL_DEFAULT_LOCALE'] = 'az'  # default to Azerbaijani
 
 app.config['LANGUAGES'] = ['az', 'ru', 'tr', 'en']
-print('Initializing Babel')
-babel = Babel(app)
-
-@babel.localeselector
 def get_locale():
     # Prefer explicit lang query param, then session, fallback to default
     return request.args.get('lang') or session.get('lang', app.config['BABEL_DEFAULT_LOCALE'])
+
+print('Initializing Babel')
+babel = Babel(app, locale_selector=get_locale)
 print('Registered Babel')
 print('Registering auth_bp')
 app.register_blueprint(auth_bp)

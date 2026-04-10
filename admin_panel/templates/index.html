@@ -14,20 +14,18 @@
             <div class="brand-badge">M</div>
             <div>
                 <div class="muted" style="font-size:0.85rem;">{{ _('Morphology Suite') }}</div>
-                <div>{{ _('Home') }}</div>
+                <div>Əsas səhifə</div>
             </div>
         </div>
         <nav>
-            <a class="pill is-active" href="{{ url_for('index') }}">{{ _('Home') }}</a>
-            <a class="pill" href="/az-word-parser">{{ _('Word Parser') }}</a>
-            <a class="pill" href="/sentence-analyzer">{{ _('Sentence Analyzer') }}</a>
-            {% if session.get('user') %}
+            <a class="pill is-active" href="{{ url_for('index') }}">Əsas səhifə</a>
+            <a class="pill" href="/az-word-parser">{{ _('Söz analizatoru') }}</a>
+            <a class="pill" href="/sentence-analyzer">{{ _('Cümlə analizatoru') }}</a>
             <a class="pill" href="{{ url_for('dashboard.dashboard') }}">{{ _('Dashboard') }}</a>
             <a class="pill" href="{{ url_for('admin_panel.admin_dashboard') }}">{{ _('Admin') }}</a>
-            <a class="pill" href="{{ url_for('admin_panel.manage_dictionaries') }}">{{ _('Dictionaries') }}</a>
-            <a class="pill" href="{{ url_for('admin_panel.manage_affixes') }}">{{ _('Affixes') }}</a>
-            <a class="pill" href="{{ url_for('admin_panel.manage_rules') }}">{{ _('Rules') }}</a>
-            {% endif %}
+            <a class="pill" href="{{ url_for('admin_panel.manage_dictionaries') }}">{{ _('Lüğətlər') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_affixes') }}">{{ _('Əlavələr') }}</a>
+            <a class="pill" href="{{ url_for('admin_panel.manage_rules') }}">{{ _('Qaydalar') }}</a>
         </nav>
         <div class="session">
             <select class="lang-select" onchange="window.location.href='/set_language/'+this.value">
@@ -52,18 +50,20 @@
                 <h1>{{ _('Analyze, curate, and monitor your corpus in one place.') }}</h1>
                 <p>{{ _('Switch languages, parse words and sentences, and manage dictionaries with the same streamlined interface.') }}</p>
                 <div style="display:flex;gap:0.7rem;flex-wrap:wrap;margin-top:1.1rem;">
-                    <a class="cta" href="/az-word-parser">{{ _('Word Analyzer') }}</a>
-                    <a class="cta" href="/sentence-analyzer">{{ _('Sentence Analyzer') }}</a>
+                    <a class="cta" href="/az-word-parser">{{ _('Söz analizatoru') }}</a>
+                    <a class="cta" href="/sentence-analyzer">{{ _('Cümlə analizatoru') }}</a>
                     <a class="btn secondary" href="{{ url_for('dashboard.dashboard') }}">{{ _('Dashboard') }}</a>
+                    <a class="btn secondary" href="{{ url_for('admin_panel.admin_dashboard') }}">{{ _('Admin Panel') }}</a>
                 </div>
             </div>
             <div class="card" style="background:linear-gradient(160deg,rgba(62,212,177,0.18),rgba(18,42,66,0.95));">
                 <h3 style="margin:0 0 0.3rem;">{{ _('Quick links') }}</h3>
                 <div class="muted" style="margin-bottom:0.8rem;">{{ _('Jump into the most used tools') }}</div>
                 <div style="display:grid;gap:0.5rem;">
-                    <a class="cta" href="/az-word-parser">{{ _('Word Analyzer') }}</a>
-                    <a class="cta" href="/sentence-analyzer">{{ _('Sentence Analyzer') }}</a>
+                    <a class="cta" href="/az-word-parser">{{ _('Söz analizatoru') }}</a>
+                    <a class="cta" href="/sentence-analyzer">{{ _('Cümlə analizatoru') }}</a>
                     <a class="btn secondary" href="{{ url_for('dashboard.dashboard') }}">{{ _('Open Dashboard') }}</a>
+                    <a class="btn secondary" href="{{ url_for('admin_panel.admin_dashboard') }}">{{ _('Open Admin Panel') }}</a>
                 </div>
             </div>
         </section>
@@ -81,8 +81,8 @@
             </div>
             <div class="card">
                 <h3>{{ _('Admin Dashboard') }}</h3>
-                <p class="muted">{{ _('Monitor corpus stats and switch dictionaries quickly.') }}</p>
-                <a class="cta" href="{{ url_for('dashboard.dashboard') }}">{{ _('Open Dashboard') }}</a>
+                <p class="muted">{{ _('Manage dictionaries, affixes, and rules from the admin control center.') }}</p>
+                <a class="cta" href="{{ url_for('admin_panel.admin_dashboard') }}">{{ _('Open Admin Panel') }}</a>
             </div>
         </section>
     </main>

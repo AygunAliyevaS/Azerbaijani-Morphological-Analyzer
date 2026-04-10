@@ -1,4 +1,10 @@
 {
+  "bu": {"POS": "PRON", "Features": {"PronType": "Dem"}},
+  "və": {"POS": "CCONJ", "Features": {}},
   "kitab": {"POS": "NOUN", "Features": {"Case": "Nom", "Number": "Sing"}},
+  "müəllif": {"POS": "NOUN", "Features": {"Case": "Nom", "Number": "Sing"}},
+  "gənc": {"POS": "ADJ", "Features": {"Degree": "Pos"}},
+  "maraqlı": {"POS": "ADJ", "Features": {"Degree": "Pos"}},
+  "oxu": {"POS": "VERB", "Features": {"VerbForm": "Inf"}},
   "oxuyur": {"POS": "VERB", "Features": {"Tense": "Pres", "Person": "3"}}
 }

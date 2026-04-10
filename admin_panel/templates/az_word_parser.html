@@ -2,7 +2,7 @@
 <html lang="{{ get_locale() }}">
 <head>
     <meta charset="UTF-8">
-    <title>{{ _('Azerbaijani Word Parser') }}</title>
+    <title>{{ _('Azerbaycan Sözü Morfem Analizatoru') }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
@@ -14,12 +14,12 @@
             <div class="brand-badge">M</div>
             <div>
                 <div class="muted" style="font-size:0.85rem;">{{ _('Morphology Suite') }}</div>
-                <div>{{ _('Word Parser') }}</div>
+                <div>{{ _('Söz analizatoru') }}</div>
             </div>
         </div>
         <nav>
             <a class="pill" href="{{ url_for('index') }}">{{ _('Home') }}</a>
-            <a class="pill is-active" href="/az-word-parser">{{ _('Word Parser') }}</a>
+            <a class="pill is-active" href="/az-word-parser">{{ _('Söz analizatoru') }}</a>
             <a class="pill" href="/sentence-analyzer">{{ _('Sentence Analyzer') }}</a>
             <a class="pill" href="{{ url_for('dashboard.dashboard') }}">{{ _('Dashboard') }}</a>
             {% if session.get('user') %}
@@ -48,14 +48,14 @@
         <div class="card">
             <div class="section-header">
                 <div>
-                    <div class="muted">{{ _('Root + affix tags') }}</div>
-                    <h2 style="margin:0;">{{ _('Azerbaijani Word Morpheme Parser') }}</h2>
+                    <div class="muted">Kök + əlavə etiketləri</div>
+                    <h2 style="margin:0;">Azerbaycan Sözü Morfem Analizatoru</h2>
                 </div>
             </div>
             <form method="post" style="display:flex;gap:0.7rem;flex-wrap:wrap;align-items:flex-end;margin-top:0.8rem;">
                 <div style="flex:1;min-width:240px;">
-                    <label for="word">{{ _('Enter Azerbaijani word') }}</label>
-                    <input type="text" name="word" id="word" value="{{ word }}" required placeholder="{{ _('Type a word...') }}">
+                    <label for="word">Azərbaycan sözünü daxil edin</label>
+                    <input type="text" name="word" id="word" value="{{ word }}" required placeholder="Azərbaycan sözünü daxil edin">
                 </div>
                 <button type="submit" style="flex-shrink:0;">{{ _('Parse') }}</button>
             </form>
